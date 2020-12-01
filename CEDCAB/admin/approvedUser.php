@@ -8,14 +8,9 @@
     $location = new Admin();  
     $locate = $location->approvedUser($Connection->con);
 
-    if (!isset($_SESSION['user']['username'])) {     
-        echo '<script>alert("You are logged out")</script>';
-       ?>
-       <script>location.replace("../login.php")</script> 
-        <?php
-    }
+   
     ?>
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -12,7 +12,7 @@ if (!isset($_SESSION['user']['username'])) {
    <script>location.replace("login.php")</script> 
     <?php
 }
-?>
+
 
 if (isset($_POST['submit'])) {
     $ids = $_POST['id'];

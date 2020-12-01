@@ -52,7 +52,7 @@ if (!isset($_SESSION['user']['username'])) {
         $name = $_SESSION['user']['username'];
         echo "<h1 style = 'background-color: pink;text-align :center;'>
          Welcome ,'".$name."'!!</h1>";?>
-        <h1 style="text-align: center;">Previous Rides</h1>
+        <h1 style="text-align: center;">Profile</h1>
         <table >
             <tr>
                 <th>Id</th>

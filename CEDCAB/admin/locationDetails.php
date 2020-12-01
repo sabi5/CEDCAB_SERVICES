@@ -6,13 +6,7 @@ $Connection = new Dbconnection();
 $location = new Location();  
 $locate = $location->place($Connection->con);
 
-if (!isset($_SESSION['user']['username'])) {     
-    echo '<script>alert("You are logged out")</script>';
-   ?>
-   <script>location.replace("../login.php")</script> 
-    <?php
-}
-?>
+
 
 ?>
 
@@ -22,7 +16,7 @@ if (!isset($_SESSION['user']['username'])) {
         <title>Location Details</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../style.css" type="text/css" rel="stylesheet">
+        <link href="sidebar.css" type="text/css" rel="stylesheet">
     </head>
     <body>
         <div class="navbar">

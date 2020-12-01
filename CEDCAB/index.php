@@ -399,7 +399,51 @@
                                 <p>
                                     <input type="submit" data-toggle="modal" data-target="#exampleModal" name="submit" value="CALCULATE FARE" class="btn form-control font-weight-bold cabbutton" required >
                                 </p>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                
+
+                                
+                                <p class="bg-info text-center ">
+                                    
+                                    <?php
+                                if(isset($final_fare)){
+                                
+                                echo $final_fare;
+                                $_SESSION['final'] = $final_fare;
+                                echo "final".$final_fare;
+                                $sql = $ride->ride($pickup, $drop,$cabtype, $luggage, $distance, $final_fare, $Connection->con);
+                                echo $sql;
+                                }else{
+                                    echo "";
+                                }
+                                
+                                ?>
+                                
+                                </p>
+                            </form>
+                            <p class="bg-info text-center ">
+                                    
+                                    <?php
+                                if(isset($final_fare)){
+                                
+                                echo $final_fare;
+                                $_SESSION['final'] = $final_fare;
+                                echo "final".$final_fare;
+                                $sql = $ride->ride($pickup, $drop,$cabtype, $luggage, $distance, $final_fare, $Connection->con);
+                                echo $sql;
+                                }else{
+                                    echo "";
+                                }
+                                
+                                ?>
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
@@ -409,7 +453,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            ...
+                                            ...hello
                                             <p class="bg-info text-center ">
                                                
                                             <?php
@@ -436,31 +480,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                
-                                <p class="bg-info text-center ">
-                                    
-                                    <?php
-                                if(isset($final_fare)){
-                                
-                                echo $final_fare;
-                                $_SESSION['final'] = $final_fare;
-                                echo "final".$final_fare;
-                                $sql = $ride->ride($pickup, $drop,$cabtype, $luggage, $distance, $final_fare, $Connection->con);
-                                echo $sql;
-                                }else{
-                                    echo "";
-                                }
-                                
-                                ?>
-                                
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <script>
             function myfunc(){
                

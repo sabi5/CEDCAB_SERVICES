@@ -26,7 +26,7 @@ if (!isset($_SESSION['user']['username'])) {
     <?php
 }
 ?>
-?> 
+
 <html>
     <head>
         <title>Add User</title>

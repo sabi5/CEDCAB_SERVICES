@@ -5,12 +5,12 @@
     require "Location.php";
 
     if (!isset($_SESSION['user']['username'])) {     
-        echo '<script>alert("You are logged out")</script>';
-       ?>
-       <script>location.replace("login.php")</script> 
-        <?php
-    }
-    
+    echo '<script>alert("You are logged out")</script>';
+   ?>
+   <script>location.replace("login.php")</script> 
+    <?php
+}
+
 
     $cab_info =array(
         "Charbagh"=>0, 

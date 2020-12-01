@@ -90,7 +90,7 @@ if (!isset($_SESSION['user']['username'])) {
         <!-- *********************** filter and sort-->
 
         <form action="pendingRides.php" method="post">
-            <input type="submit" name="filter" value="FILTER">
+            <input type="submit" name="filter" value="FILTER" class="filter">
                 <select name="select">
                     <option value="" disabled selected>Choose an option</option>
                     <option value="last 7 days">last 7 days</option>
@@ -111,7 +111,7 @@ if (!isset($_SESSION['user']['username'])) {
 
 <br>
         <form action="pendingRides.php" method="post">
-            <input type="submit" name="sort" value="SORT BY">
+            <input type="submit" name="sort" value="SORT BY" class="filter">
             <select name="select">
                 <option value="" disabled selected>Choose an option</option>
                 <option value="ascending">Ascending(RIDE_DATE)</option>

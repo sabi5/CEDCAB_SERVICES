@@ -10,13 +10,7 @@
     $location = new Admin();  
     $locate = $location->allRide($Connection->con);
 
-    if (!isset($_SESSION['user']['username'])) {     
-        echo '<script>alert("You are logged out")</script>';
-       ?>
-       <script>location.replace("../login.php")</script> 
-        <?php
-    }
-    ?>
+    
 
     ?>
 
@@ -99,7 +93,7 @@
         <!-- *********************** filter and sort-->
 
         <form action="allRide.php" method="post">
-            <input type="submit" name="filter" value="FILTER">
+            <input type="submit" name="filter" value="FILTER" class="filter">
                 <select name="select">
                     <option value="" disabled selected>Choose an option</option>
                     <option value="last 7 days">last 7 days</option>
@@ -108,7 +102,7 @@
         </form>
         <br>
         <form action="allRide.php" method="post">
-            <input type="submit" name="filter" value="FILTER(CABTYPE)">
+            <input type="submit" name="filter" value="FILTER(CABTYPE)" class="filter">
                 <select name="select">
                     <option value="" disabled selected>Choose an option</option>
                     <option value="CedMicro">CedMicro</option>
@@ -120,7 +114,7 @@
         <br>
 
         <form action="allRide.php" method="post">
-            <input type="submit" name="sort" value="SORT BY">
+            <input type="submit" name="sort" value="SORT BY" class="filter">
                 <select name="select">
                     <option value="" disabled selected>Choose an option</option>
                     <option value="ascending">Ascending(RIDE_DATE)</option>

@@ -80,8 +80,8 @@ if (!isset($_SESSION['user']['username'])) {
                             <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";}?></td>
                             <td><?php echo $value['password']; ?></td>
                             <td><?php echo $value['is_admin']; ?></td>
-                            <td><a href="edituser.php?id=<?php echo $value['user_id']; ?>" title='Edit'><img src='resources/images/icons/pencil.png' alt='Edit' /></a></td>
-							<td><a href="deleteuser.php?id=<?php echo $value['user_id']; ?>" title='Delete'><img src='resources/images/icons/cross.png' alt='Delete'/></a></td>
+                            <td><a href="edituser.php?id=<?php echo $value['user_id']; ?>" title='Edit'>EDIT</a></td>
+							<td><a href="deleteuser.php?id=<?php echo $value['user_id']; ?>" title='Delete'>DELETE</a></td>
                         </tr>
                     <?php
                     }?>

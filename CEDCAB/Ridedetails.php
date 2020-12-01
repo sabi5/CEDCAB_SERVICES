@@ -39,6 +39,7 @@ require "User.php";
                     
                     if ($iquery) {
                         echo "<script>alert('Inserted Successful');</script>";
+                        echo "<script>alert(".$final_fare.");</script>";
                         echo  "<script>location.replace('customer.php');</script>";
                         
                     } else {
