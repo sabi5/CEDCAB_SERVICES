@@ -1,0 +1,76 @@
+#head{
+    background: url('cab.jpeg') no-repeat center center;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
+    text-align: center;   
+    color: white;
+    position: relative;
+    height: 900px;
+    margin-right: 0;
+}
+
+#heading{
+    font-size: 55px;
+    top: -60%;
+    font-style: italic;
+    color: rgb(255, 217, 0);
+}
+
+#para{
+    font-size: 25px;
+}
+
+#cab{
+    color: chartreuse;
+}
+.city{
+    background-color:black;
+    border-radius: 20px;
+    padding-right: 10px;
+}
+
+.head-city{
+    color: black;
+    font-weight: bold;
+    font-style: italic;
+    font-size: medium;
+    border-radius: 2px;
+    background-color:rgb(255, 217, 0);
+    width: 150px;
+    margin-left: 40%;
+    
+}
+.sub-city{
+    color: white;
+    font-weight: bolder;
+}
+
+label, input{
+    color: rgb(255, 217, 0);
+    font-weight: bold;
+}
+
+select{
+    width: 500px;
+    appearance: none;
+}
+
+.cabbutton{
+    align-items: center;
+    border-radius: 2px;
+    background-color:rgb(255, 217, 0);
+}
+
+.result{
+    /* width: 900px; */
+   
+    background-color: chartreuse;
+}
+
+@media only screen and (max-width: 768px) {
+    footer {
+      margin-bottom: -1000px;
+    }
+  }
