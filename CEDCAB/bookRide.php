@@ -10,7 +10,7 @@
        <script>location.replace("login.php")</script> 
         <?php
     }
-    ?>
+    
 
     $cab_info =array(
         "Charbagh"=>0, 
