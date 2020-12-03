@@ -26,6 +26,7 @@ if (!isset($_SESSION['user']['username'])) {
     </head>
     <body>
         <div class="navbar">
+        <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span style="color:chartreuse">CAB</span></a>
             <a href="customer.php">Dashboard</a>
             <div class="dropdown">
                 <button class="dropbtn">My Profile</button>
@@ -43,7 +44,7 @@ if (!isset($_SESSION['user']['username'])) {
                 </div>
             </div>
             <a href="bookRide.php">Book new ride </a>
-            <a href="invoice.php">Invoice</a> 
+            <!-- <a href="invoice.php">Invoice</a>  -->
             <a href="logout.php">Logout</a>  
         </div>
   
@@ -51,7 +52,7 @@ if (!isset($_SESSION['user']['username'])) {
     
         $name = $_SESSION['user']['username'];
         echo "<h1 style = 'background-color: pink;text-align :center;'>
-         Welcome ,'".$name."'!!</h1>";?>
+         Welcome , ' ".$name." ' !!</h1>";?>
         <h1 style="text-align: center;">Manage Customers</h1>
         <table >
             <tr>
@@ -60,9 +61,9 @@ if (!isset($_SESSION['user']['username'])) {
                 <th>email</th>
                 <th>Dateofsignup</th>
                 <th>mobile</th>
-                <th>isblock</th>
-                <th>password</th>
-                <th>is_admin</th>
+                <th>status</th>
+                <!-- <th>password</th>
+                <th>is_admin</th> -->
                 <th>Action</th>
             </tr>
             
@@ -78,10 +79,10 @@ if (!isset($_SESSION['user']['username'])) {
                             <td><?php echo $value['dateofsignup']; ?></td>
                             <td><?php echo $value['mobile']; ?></td>
                             <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";}?></td>
-                            <td><?php echo $value['password']; ?></td>
-                            <td><?php echo $value['is_admin']; ?></td>
-                            <td><a href="edituser.php?id=<?php echo $value['user_id']; ?>" title='Edit'>EDIT</a></td>
-							<td><a href="deleteuser.php?id=<?php echo $value['user_id']; ?>" title='Delete'>DELETE</a></td>
+                            <!-- <td><?php echo $value['password']; ?></td>
+                            <td><?php echo $value['is_admin']; ?></td> -->
+                            <td><a href="edituser.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+							<!-- <td><a href="deleteuser.php?id=<?php echo $value['user_id']; ?>" title='Delete'>DELETE</a></td> -->
                         </tr>
                     <?php
                     }?>

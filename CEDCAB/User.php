@@ -17,9 +17,9 @@ class User {
     public $con;
     
 
-    function login ($username, $password, $checked, $con){
+    function login ($email, $password, $con){
 
-        $sql = "SELECT * FROM `tbl_user` where `username` = '$username'";
+        $sql = "SELECT * FROM `tbl_user` where `email` = '$email'";
         
         $query = $con->query($sql);
         
@@ -28,9 +28,10 @@ class User {
 
             $username_pass = $query->fetch_assoc();
             
-            $user = $username_pass['username'];
+            $email = $username_pass['email'];
+            // echo $email;
            
-            setcookie('username', $user, time() + (86400 * 30), "/"); // 86400 = 1 day
+            setcookie('username', $email, time() + (86400 * 30), "/"); // 86400 = 1 day
                
                 $db_pass = $username_pass['password'];
                 $_SESSION['user'] = array('username'=>$username_pass['username'],
@@ -39,11 +40,14 @@ class User {
                 // ************* end cookies
                 if ($password==$db_pass) {
                     if ($_SESSION['user']['is_admin'] == 1) {
-                       echo "<script>alert('Admin login successful');</script>";
+                    //    echo "<script>alert('Admin login successful');</script>";
                         
                         echo  "<script>location.replace('admin/admin.php');</script>";
                     } elseif($_SESSION['user']['isblock'] == 1) {
-                        echo "<script>location.replace('bookRide.php');</script>";
+                        // echo "<script>alert('Inserted Successfully');</script>";
+                        echo "<script>location.replace('customer.php');</script>";
+                        
+
                     } else{
                         echo "<script>alert('Sorry! you are block by admin');</script>";
                         echo "<script>location.replace('login.php');</script>";
@@ -54,7 +58,7 @@ class User {
                 }
         
             } else {
-                echo "<script>alert('Invalid Username');</script>";
+                echo "<script>alert('Invalid Email');</script>";
             }
         
     
@@ -63,6 +67,12 @@ class User {
     function signup($username, $password, $repassword, $email, $mobile, $con){
 
         if (isset($_POST['submit'])) {
+
+            if ( ctype_alpha($username))  
+      
+                echo "<script>alert('yes');</script>"; 
+            else 
+                echo "<script>alert('Enter alphabets only');</script>"; 
         
             $emailquery = "SELECT * FROM tbl_user WHERE email='$email'";
             $query = mysqli_query($con, $emailquery);

@@ -1,6 +1,7 @@
 <?php 
     session_start();
-    require "Ridedetails.php";
+    // require "Ridedetails.php";
+    require "Bookrides.php";
     require "Dbconnection.php";
     require "Location.php";
 
@@ -22,7 +23,9 @@
         "Gorakhpur"=>210
     );
     
-    $ride = new Ridedetails();
+    // $ride = new Ridedetails();
+    
+    $ride = new Bookrides();
     $Connection = new Dbconnection();
     $location = new Location();  
     $locate = $location->place($Connection->con);
@@ -292,7 +295,7 @@
                                     </li>
                                     <li class="nav-item">
                                    
-                                        <a class="nav-link text-warning" href="#">Features</a>
+                                        <a class="nav-link text-warning" href="logout.php">LOGOUT</a>
                                     </li>
                                 </ul>
                             </div>
@@ -317,13 +320,13 @@
                 <div class="container">
                     <div class="row text-left ">
                         <div class="col-lg-7 city">
-                            <form action="index.php" method="post">
+                            <form action="bookRide.php" method="post">
                                 <h2 class="text-center head-city mt-3 pl-4">CITY TAXI</h2>
                                 <p class="text-center sub-city">Your everyday travel partner</p>
                                 <p class="text-center sub-city">AC cabs for point to point travel</p>
                                 <p>
                                 <div class="form-group row">
-                                    <label for="pickup" class="col-sm-2 col-form-label">PICKUP </label>
+                                    <label for="pickup" class = "col-sm-2 col-form-label">PICKUP </label>
                                     <div class="col-sm-10">
                                         <select class="form-control" name="pickup">
                                         <?php 
@@ -377,46 +380,34 @@
                                 </div>
                                
                                 <p>
-                                    <input type="submit" data-toggle="modal" data-target="#exampleModal" name="submit" value="CALCULATE FARE" class="btn form-control font-weight-bold cabbutton" required >
+                                    <input type="submit" name="submit" value="CALCULATE FARE" class="btn form-control font-weight-bold cabbutton" onclick="return confirm('Are you sure?')" required >
                                 </p>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            ...
-                                            <p class="bg-info text-center ">
+                                <p class="bg-info text-center ">
                                                
                                             <?php
                                                 if(isset($final_fare)){
                                                 
-                                                echo $final_fare;
+                                                    echo " FINAL FARE : Rs. ".$final_fare. " /-</br>";
+                                                    echo " DISTANCE : ".$distance. " km</br> ";
+                                                    echo " PICKUP : ".$pickup. "</br> ";
+                                                    echo " DROP : ".$drop. "</br> ";
+                                                    echo " LUGGAGE : ".$luggage. " kg</br> ";
+                                                    echo " CABTYPE : ".$cabtype. "</br> ";
+                                                    
+                                                    // echo "<script>alert('Inserted Successful');</script>";
+                                                // echo $final_fare;
                                                 $_SESSION['final'] = $final_fare;
-                                                echo "final".$final_fare;
+                                                // echo "final".$final_fare;
                                                 $sql = $ride->ride($pickup, $drop,$cabtype, $luggage, $distance, $final_fare, $Connection->con);
-                                                echo $sql;
+                                                // echo $sql;
+                                                
                                                 }else{
                                                     echo "";
                                                 }
                                         
                                             ?>
                                 
-                                        </p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <!-- <button type="button" class="btn btn-primary">Book Now</button> -->
-                                            <input type="submit" value="Book Now" class="btn btn-primary" required >
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                </p>
                             </form>
                         </div>
                     </div>

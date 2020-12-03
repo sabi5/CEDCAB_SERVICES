@@ -7,9 +7,29 @@
 
     $location = new Admin();  
     $locate = $location->approvedUser($Connection->con);
+    
 
-   
-    ?>
+?>
+
+<!-- *********************  filter -->
+<?php
+    
+
+    if(isset($_POST['sort'])){
+        if(!empty($_POST['select'])){
+            $sort = $_POST['select'];
+            $sortDate = $location->sortDate($sort, $Connection->con);
+            $sortName = $location->sortName($sort, $Connection->con);
+
+        }
+        else{
+        echo("not ");
+        }
+    }
+        
+?>
+<!-- ********************************************* -->
+
 
 
 <!DOCTYPE html>
@@ -22,6 +42,7 @@
     </head>
     <body>
         <div class="navbar">
+        <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span style="color:chartreuse">CAB</span></a>
             <a href="admin.php">Dashboard</a>
             
             <div class="dropdown">
@@ -49,10 +70,27 @@
                     <a href="addLocation.php">Add New Location</a>
                 </div>
             </div> 
+            <!-- <a href="invoice.php">Invoice</a>   -->
             <a href="../logout.php">Logout</a>  
         </div>
   
         <h1 style="text-align: center;">Approved Users</h1>
+
+        <!-- *********************** filter and sort-->
+
+        <form action="approvedUser.php" method="post">
+            <select name="select" required>
+                <option value="" disabled selected>Choose an option</option>
+                <option value="ascending">Ascending(DATE)</option>
+                <option value="descending">Descending(DATE)</option>
+                <option value="asc">Ascending(NAME)</option>
+                <option value="desc">Descending(NAME)</option>
+                
+            </select>
+            <input type="submit" name="sort" value="SORT BY" class="filter">
+        </form>
+        <br><br>
+<!-- *********************************************** end filter -->
         <table>
             <tr>
                 <th>User_id</th>
@@ -60,32 +98,105 @@
                 <th>Email</th>
                 <th>dateofsignup</th>
                 <th>mobile</th>
-                <th>isblock</th>
-                <th>password</th>
-                <th>Is_admin</th>
+                <th>status</th>
                 <th>Action</th>
                 
             </tr>
             
             <?php
-                
-                foreach($locate as $value){
-                ?>
+
+                if(isset($_POST['sort']) && $sort == "ascending"){
+                    foreach($sortDate as $value){
+                        
+                    ?>
+                        <tr>
+                            <td><?php echo $value['user_id']; ?></td>
+                            <td><?php echo $value['username']; ?></td>
+                            <td><?php echo $value['email']; ?></td>
+                            <td><?php echo $value['dateofsignup']; ?></td>
+                            <td><?php echo $value['mobile']; ?></td>
+                            <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";} ?></td>
+                            
+                            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                            <!-- <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                        </tr>
+                    <?php
+                    }
+                }elseif(isset($_POST['sort']) && $sort == "descending"){
+                    foreach($sortDate as $value){
                     
-                    <tr>
+                        
+                    ?>
+                        
+                        <tr>
+                            <td><?php echo $value['user_id']; ?></td>
+                            <td><?php echo $value['username']; ?></td>
+                            <td><?php echo $value['email']; ?></td>
+                            <td><?php echo $value['dateofsignup']; ?></td>
+                            <td><?php echo $value['mobile']; ?></td>
+                            <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";} ?></td>
+                            <!-- <td><?php echo $value['password']; ?></td>
+                            <td><?php echo $value['is_admin']; ?></td> -->
+                            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                            <!-- <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                        </tr>
+                    <?php
+                    }
+                }elseif(isset($_POST['sort']) && $sort == "asc"){
+                    foreach($sortName as $value){
+                    
+                    ?>
+                        <tr>
                         <td><?php echo $value['user_id']; ?></td>
-                        <td><?php echo $value['username']; ?></td>
-                        <td><?php echo $value['email']; ?></td>
-                        <td><?php echo $value['dateofsignup']; ?></td>
-                        <td><?php echo $value['mobile']; ?></td>
-                        <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";} ?></td>
-                        <td><?php echo $value['password']; ?></td>
-                        <td><?php echo $value['is_admin']; ?></td>
-                        <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit'>EDIT</a></td>
-                        <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete'>DELETE</a></td>
-                    </tr>
-                <?php
-            }?>
+                            <td><?php echo $value['username']; ?></td>
+                            <td><?php echo $value['email']; ?></td>
+                            <td><?php echo $value['dateofsignup']; ?></td>
+                            <td><?php echo $value['mobile']; ?></td>
+                            <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";} ?></td>
+                            <!-- <td><?php echo $value['password']; ?></td>
+                            <td><?php echo $value['is_admin']; ?></td> -->
+                            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                            <!-- <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                        </tr>
+                    <?php
+                    }
+                }elseif(isset($_POST['sort']) && $sort == "desc"){
+                    foreach($sortName as $value){
+                        
+                    ?>
+                        <tr>
+                        <td><?php echo $value['user_id']; ?></td>
+                            <td><?php echo $value['username']; ?></td>
+                            <td><?php echo $value['email']; ?></td>
+                            <td><?php echo $value['dateofsignup']; ?></td>
+                            <td><?php echo $value['mobile']; ?></td>
+                            <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";} ?></td>
+                            <!-- <td><?php echo $value['password']; ?></td>
+                            <td><?php echo $value['is_admin']; ?></td> -->
+                            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                            <!-- <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                        </tr>
+                    <?php
+                    }
+                }else{
+                                
+                    foreach($locate as $value){
+                    ?>
+                        
+                        <tr>
+                            <td><?php echo $value['user_id']; ?></td>
+                            <td><?php echo $value['username']; ?></td>
+                            <td><?php echo $value['email']; ?></td>
+                            <td><?php echo $value['dateofsignup']; ?></td>
+                            <td><?php echo $value['mobile']; ?></td>
+                            <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";} ?></td>
+                            <!-- <td><?php echo $value['password']; ?></td>
+                            <td><?php echo $value['is_admin']; ?></td> -->
+                            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                            <!-- <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                        </tr>
+                    <?php
+                }}?>
         </table>
     </body>
 </html>

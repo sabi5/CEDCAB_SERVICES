@@ -1,7 +1,7 @@
 <?php 
     session_start();
-    // require "Ridedetails.php";
-    require "Bookrides.php";
+    require "Ridedetails.php";
+    // require "Bookrides.php";
     require "Dbconnection.php";
     require "Location.php";
 
@@ -15,11 +15,15 @@
         "Gorakhpur"=>210
     );
     
-    // $ride = new Ridedetails();
-    $ride = new Bookrides();
+    $ride = new Ridedetails();
+    // $ride = new Bookrides();
     $Connection = new Dbconnection();
     $location = new Location();  
     $locate = $location->place($Connection->con);
+    
+    if(isset($_POST['finalsubmit'])){
+        $sql = $ride->ride( $Connection->con);
+    }
    
     if(isset($_POST['submit'])){
         $pickup = $_POST['pickup'];
@@ -307,33 +311,7 @@
                 Choose from a range of categories and prices
                 </p>
 
-                <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button> -->
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Book Now</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- end modal -->
+        
                 <div class="container">
                     <div class="row text-left ">
                         <div class="col-lg-7 city">
@@ -352,7 +330,7 @@
                                                 <option value="<?php echo $value['name'];?>"><?php echo $value['name'];?></option>
                                             <?php
                                             }
-                                           ?>
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -368,7 +346,7 @@
                                                 <option value="<?php echo $value['name'];?>"><?php echo $value['name'];?></option>
                                             <?php
                                             }
-                                           ?>
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -387,7 +365,7 @@
                                     </div>
                                 </div>
                                 </p>
-                               
+                                
                                 <div id="lug" class="form-group row">
                                     <label for="luggage" class="col-sm-2 col-form-label">LUGGAGE</label>
                                     <div class="col-sm-10">
@@ -395,55 +373,38 @@
                                     </div>
                                     <br>
                                 </div>
-                               
+                                
                                 <p>
-                                    <input type="submit" data-toggle="modal" data-target="#exampleModal" name="submit" value="CALCULATE FARE" class="btn form-control font-weight-bold cabbutton" required >
+                                    <input type="submit" data-toggle="modal" data-target="#exampleModal" name="submit" value="CALCULATE FARE" class="btn form-control font-weight-bold cabbutton" id="submit" required >
                                 </p>
                                 
-
                                 
                                 <p class="bg-info text-center ">
                                     
-                                    <?php
+                                <?php
                                 if(isset($final_fare)){
+                                    echo "<marquee>For confirm booking, click <b style = color:red;>BOOK NOW</b> button </marquee></br>";
+                                    echo " FINAL FARE : Rs. ".$final_fare. " /-</br>";
+                                    echo " DISTANCE : ".$distance. " km</br> ";
+                                    echo " PICKUP : ".$pickup. "</br> ";
+                                    echo " DROP : ".$drop. "</br> ";
+                                    echo " LUGGAGE : ".$luggage. " kg</br> ";
+                                    echo " CABTYPE : ".$cabtype. "</br> ";
+                                ?>
+                                <!-- <input type="submit" name ="submit" value ="Book Now"> -->
+                                <!-- <button type ="submit" name ="submit">Book Now</button> -->
+                                <?php
                                 
-                                echo $final_fare;
-                                $_SESSION['final'] = $final_fare;
-                                echo "final".$final_fare;
-                                $sql = $ride->ride($pickup, $drop,$cabtype, $luggage, $distance, $final_fare, $Connection->con);
-                                echo $sql;
                                 }else{
                                     echo "";
                                 }
-                                
                                 ?>
                                 
                                 </p>
-                            </form>
-                            <p class="bg-info text-center ">
-                                    
-                                    <?php
-                                if(isset($final_fare)){
-                                
-                                echo $final_fare;
-                                $_SESSION['final'] = $final_fare;
-                                echo "final".$final_fare;
-                                $sql = $ride->ride($pickup, $drop,$cabtype, $luggage, $distance, $final_fare, $Connection->con);
-                                echo $sql;
-                                }else{
-                                    echo "";
-                                }
-                                
-                                ?>
-                                
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class= "text-center">
+                                <button type="submit" name ="finalsubmit" id="button" value="Book Now" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary" required>BOOK NOW</button></div>
+                                </form>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
@@ -452,43 +413,62 @@
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-                                            ...hello
-                                            <p class="bg-info text-center ">
-                                               
-                                            <?php
-                                                if(isset($final_fare)){
-                                                
-                                                echo $final_fare;
-                                                $_SESSION['final'] = $final_fare;
-                                                echo "final".$final_fare;
-                                                $sql = $ride->ride($pickup, $drop,$cabtype, $luggage, $distance, $final_fare, $Connection->con);
-                                                echo $sql;
-                                                }else{
-                                                    echo "";
-                                                }
-                                        
-                                            ?>
+                                    <form action="index.php" method ="post">
+                                <div class="modal-body">
+                                    ...hello
                                 
-                                        </p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <!-- <button type="button" class="btn btn-primary">Book Now</button> -->
-                                            <input type="submit" value="Book Now" class="btn btn-primary" required >
-                                        </div>
+                                    <p class="bg-info text-center ">
+                            
+                                        <?php
+                                        if(isset($final_fare)){
+                                        
+                                            $_SESSION['final'] = $final_fare;
+                                            echo " FINAL FARE : Rs. ".$final_fare. " /-</br>";
+                                            echo " DISTANCE : ".$distance. " km</br> ";
+                                            echo " PICKUP : ".$pickup. "</br> ";
+                                            echo " DROP : ".$drop. "</br> ";
+                                            echo " LUGGAGE : ".$luggage. " kg</br> ";
+                                            echo " CABTYPE : ".$cabtype. "</br> ";
+                                        ?>
+                                        
+                                        <!-- <input type="submit" name ="submit" value ="Book Now"> -->
+                                        <?php
+                                        
+                                        }else{
+                                            echo "";
+                                        }
+                                        
+                                        ?>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <!-- <button type="button" class="btn btn-primary">Book Now</button> -->
+                                    <input type="submit" name ="finalsubmit" value="Book Now" class="btn btn-primary" required >
+                                </div>
+                            </form>
+
                                         </div>
                                     </div>
                                 </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--  -->
         <script>
+            
             function myfunc(){
                
-                var x = document.getElementById("select").value;
+                // var x = document.getElementById("select").value;
                 
-                if(x == "CedMicro"){
-                    document.getElementById("lug").style.display = "none";
+                if($final_fare){
+                    document.getElementById("button").style.display = "flex";
                 } else {
-                    document.getElementById("lug").style.display = "flex";
+                    document.getElementById("button").style.display = "none";
                 }
             }
             function myFunction() {

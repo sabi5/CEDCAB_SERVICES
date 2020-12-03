@@ -21,16 +21,18 @@
             // echo $customer_user_id;
 
             $final_fare = $_SESSION['final'];
+            echo $final_fare;
+
             $distance = $_SESSION['distance'];
-            // echo "distance".$distance;
+            echo "distance".$distance;
 
 
-            if(isset($_POST['submit']) && !isset($_SESSION['user'])){
+            if(isset($_POST['finalsubmit']) && !isset($_SESSION['user'])){
                 echo "<script>alert('please login first');</script>";
                 echo  "<script>location.replace('login.php');</script>";
             }else{
 
-                if (isset($_POST['submit'])) {
+                if (isset($_POST['submit']) ) {
 
                     $insertquery = "INSERT INTO tbl_ride (ride_date, pick_place, drop_place, cab_type, total_distance, luggage, total_fare, status, customer_user_id) 
                             VALUES (NOW(), '$pickup', '$drop', '$cabtype','$distance', '$luggage', '$final_fare', 1, '$customer_user_id' )";

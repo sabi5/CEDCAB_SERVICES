@@ -39,6 +39,7 @@
     <body>
         <div class="wrapper">
             <div class="navbar">
+            <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span style="color:chartreuse">CAB</span></a>
                 <a href="customer.php">Dashboard</a>
                 <div class="dropdown">
                     <button class="dropbtn">My Profile</button>
@@ -57,7 +58,7 @@
                 </div>
                 <a href="bookRide.php">Book new ride </a>
                 <a href="changePassword.php">Change password </a>
-                <a href="invoice.php">Invoice</a> 
+                <!-- <a href="invoice.php">Invoice</a>  -->
                 <a href="logout.php">Logout</a>  
             </div>
         </div>
@@ -72,6 +73,7 @@
                 <div class="tile1">
                     <i class="fa fa-money" aria-hidden="true"></i>
                     <a href="allRide.php" class="anchor">Total Spent on Cabs</a> 
+                    <br>
                     <?php 
                          
                          $display = 0; 
@@ -79,7 +81,7 @@
                          foreach ($locate as $value){
                              $display += $value['total_fare']; 
                          }
-                         echo $display;
+                         echo "</br> Rs. ".$display." /-";
                     
                     ?>        
                 </div>
@@ -88,6 +90,7 @@
                 <div class="tile1">
                     <i class="fa fa-car" aria-hidden="true"></i>
                     <a href="allRide.php" class="anchor">Total Rides</a> 
+                    <br>
                     <?php echo "</br>".$countRide;?>
                 </div>
                 
@@ -95,7 +98,7 @@
             <div class="item4 tile" id="item4">
                 <div class="tile1">
                     <i class="fa fa-car" aria-hidden="true"></i>
-                    <a href="pendingRides.php" class="anchor">Pending Rides</a>
+                    <a href="pendingRides.php" class="anchor">Pending Rides</a><br>
                     <?php echo "</br>". $pendingRide;?>
                 </div>
             </div>

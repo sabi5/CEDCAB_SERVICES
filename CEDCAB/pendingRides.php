@@ -18,11 +18,11 @@ if (!isset($_SESSION['user']['username'])) {
 
 <!-- *********************  filter -->
 <?php
+
     if(isset($_POST['filter'])){
         if(!empty($_POST['select'])){
             $selected = $_POST['select'];
-            echo $selected;
-            echo "</br>";
+            
             $filter = $location->filter($selected, $Connection->con);
         }
         else{
@@ -33,19 +33,17 @@ if (!isset($_SESSION['user']['username'])) {
     if(isset($_POST['sort'])){
         if(!empty($_POST['select'])){
             $sort = $_POST['select'];
-            echo $sort;
-            echo "</br>";
+          
             $sorted = $location->sort($sort, $Connection->con);
             $fare = $location->fare($sort, $Connection->con);
             $cabtype = $location->cabtype($sort, $Connection->con);
 
         }
-        else{
-            echo("not");
-        }
+        
     }
         
 ?>
+
 <!-- ********************************************* -->
 
 
@@ -59,6 +57,7 @@ if (!isset($_SESSION['user']['username'])) {
     </head>
     <body>
         <div class="navbar">
+        <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span style="color:chartreuse">CAB</span></a>
             <a href="customer.php">Dashboard</a>
             <div class="dropdown">
                 <button class="dropbtn">My Profile</button>
@@ -76,7 +75,7 @@ if (!isset($_SESSION['user']['username'])) {
                 </div>
             </div> 
             <a href="bookRide.php">Book new ride </a>
-            <a href="invoice.php">Invoice</a> 
+            <!-- <a href="invoice.php">Invoice</a>  -->
             <a href="logout.php">Logout</a>  
         </div>
   
@@ -84,35 +83,36 @@ if (!isset($_SESSION['user']['username'])) {
     
         $name = $_SESSION['user']['username'];
         echo "<h1 style = 'background-color: pink;text-align :center;'>
-         Welcome ,'".$name."'!!</h1>";?>
+         Welcome , ' ".$name." ' !!</h1>";?>
         <h1 style="text-align: center;">Pending Rides</h1>
 
         <!-- *********************** filter and sort-->
 
         <form action="pendingRides.php" method="post">
+            <select name="select" required>
+                <option value="" disabled selected>Choose an option</option>
+                <option value="last 7 days">last 7 days</option>
+                <option value="last 30 days">last 30 days</option>
+                <option value="No filter">No filter</option>
+            </select>
             <input type="submit" name="filter" value="FILTER" class="filter">
-                <select name="select">
-                    <option value="" disabled selected>Choose an option</option>
-                    <option value="last 7 days">last 7 days</option>
-                    <option value="last 30 days">last 30 days</option>
-                </select>
         </form>
-<br>
+        <br>
         <form action="pendingRides.php" method="post">
+            <select name="select" required>
+                <option value="" disabled selected>Choose an option</option>
+                <option value="CedMicro">CedMicro</option>
+                <option value="CedMini">CedMini</option>
+                <option value="CedRoyal">CedRoyal</option>
+                <option value="CedSUV">CedSUV</option>
+                <option value="No filter">No filter</option>
+            </select>
             <input type="submit" name="filter" value="FILTER(CABTYPE)" class="filter">
-                <select name="select">
-                    <option value="" disabled selected>Choose an option</option>
-                    <option value="CedMicro">CedMicro</option>
-                    <option value="CedMini">CedMini</option>
-                    <option value="CedRoyal">CedRoyal</option>
-                    <option value="CedSUV">CedSUV</option>
-                </select>
         </form>
 
-<br>
+        <br>
         <form action="pendingRides.php" method="post">
-            <input type="submit" name="sort" value="SORT BY" class="filter">
-            <select name="select">
+            <select name="select" required>
                 <option value="" disabled selected>Choose an option</option>
                 <option value="ascending">Ascending(RIDE_DATE)</option>
                 <option value="descending">Descending(RIDE_DATE)</option>
@@ -120,9 +120,11 @@ if (!isset($_SESSION['user']['username'])) {
                 <option value="desc">Descending(FARE)</option>
                 <option value="cab asc">Ascending(CABTYPE)</option>
                 <option value="cab desc">Descending(CABTYPE)</option>
+                <option value="No filter">No filter</option>
             </select>
+            <input type="submit" name="sort" value="SORT BY" class="filter">
         </form>
-<br><br>
+        <br><br>
 <!-- *********************************************** end filter -->
 
         <table>

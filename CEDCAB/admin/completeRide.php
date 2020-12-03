@@ -18,8 +18,8 @@ $locate = $location->completeRide($Connection->con);
     if(isset($_POST['filter'])){
         if(!empty($_POST['select'])){
             $selected = $_POST['select'];
-            echo $selected;
-            echo "</br>";
+            // echo $selected;
+            // echo "</br>";
             $filter = $ride->filterAdmin($selected, $Connection->con);
         }
         else{
@@ -30,8 +30,8 @@ $locate = $location->completeRide($Connection->con);
     if(isset($_POST['sort'])){
         if(!empty($_POST['select'])){
             $sort = $_POST['select'];
-            echo $sort;
-            echo "</br>";
+            // echo $sort;
+            // echo "</br>";
             $sorted = $ride->sortAdmin($sort, $Connection->con);
             $fare = $ride->fareAdmin($sort, $Connection->con);
             $cabtype = $ride->cabtypeAdmin($sort, $Connection->con);
@@ -56,6 +56,7 @@ $locate = $location->completeRide($Connection->con);
     </head>
     <body>
         <div class="navbar">
+        <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span style="color:chartreuse">CAB</span></a>
             <a href="admin.php">Dashboard</a>
             
             <div class="dropdown">
@@ -83,7 +84,7 @@ $locate = $location->completeRide($Connection->con);
                     <a href="addLocation.php">Add New Location</a>
                 </div>
             </div> 
-            
+            <!-- <a href="invoice.php">Invoice</a>   -->
             <a href="../logout.php">Logout</a>  
         </div>
   
@@ -92,38 +93,39 @@ $locate = $location->completeRide($Connection->con);
         <!-- *********************** filter and sort-->
 
         <form action="completeRide.php" method="post">
+            <select name="select" required>
+                <option value="" disabled selected>Choose an option</option>
+                <option value="last 7 days">last 7 days</option>
+                <option value="last 30 days">last 30 days</option>
+            </select>
             <input type="submit" name="filter" value="FILTER" class="filter">
-                <select name="select">
-                    <option value="" disabled selected>Choose an option</option>
-                    <option value="last 7 days">last 7 days</option>
-                    <option value="last 30 days">last 30 days</option>
-                </select>
         </form>
-<br>
+        <br>
         <form action="completeRide.php" method="post">
+            <select name="select" required >
+                <option value="" disabled selected>Choose an option</option>
+                <option value="CedMicro">CedMicro</option>
+                <option value="CedMini">CedMini</option>
+                <option value="CedRoyal">CedRoyal</option>
+                <option value="CedSUV">CedSUV</option>
+            </select>
             <input type="submit" name="filter" value="FILTER(CABTYPE)" class="filter">
-                <select name="select">
-                    <option value="" disabled selected>Choose an option</option>
-                    <option value="CedMicro">CedMicro</option>
-                    <option value="CedMini">CedMini</option>
-                    <option value="CedRoyal">CedRoyal</option>
-                    <option value="CedSUV">CedSUV</option>
-                </select>
         </form>
-<br>
+        <br>
         <form action="completeRide.php" method="post">
+            
+            <select name="select" required>
+                <option value="" disabled selected>Choose an option</option>
+                <option value="ascending">Ascending(RIDE_DATE)</option>
+                <option value="descending">Descending(RIDE_DATE)</option>
+                <option value="asc">Ascending(FARE)</option>
+                <option value="desc">Descending(FARE)</option>
+                <option value="cab asc">Ascending(CABTYPE)</option>
+                <option value="cab desc">Descending(CABTYPE)</option>
+            </select>
             <input type="submit" name="sort" value="SORT BY" class="filter">
-                <select name="select">
-                    <option value="" disabled selected>Choose an option</option>
-                    <option value="ascending">Ascending(RIDE_DATE)</option>
-                    <option value="descending">Descending(RIDE_DATE)</option>
-                    <option value="asc">Ascending(FARE)</option>
-                    <option value="desc">Descending(FARE)</option>
-                    <option value="cab asc">Ascending(CABTYPE)</option>
-                    <option value="cab desc">Descending(CABTYPE)</option>
-                </select>
         </form>
-<br><br>
+        <br><br>
         <!-- *********************************************** end filter -->
 
         <table>
@@ -158,7 +160,9 @@ $locate = $location->completeRide($Connection->con);
                                 <td><?php echo $value['total_fare']; ?></td>
                                 <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                 <td><?php echo $value['customer_user_id']; ?></td>
-							    <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							    <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                                
                             </tr>
                         <?php
                         }
@@ -178,7 +182,8 @@ $locate = $location->completeRide($Connection->con);
                                     <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                     <td><?php echo $value['customer_user_id']; ?></td>
                                     
-							        <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							        <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                    <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit' >INVOICE</a></td>
                                 </tr>
                             <?php
                             }
@@ -198,7 +203,8 @@ $locate = $location->completeRide($Connection->con);
                                     <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                     <td><?php echo $value['customer_user_id']; ?></td>
                                     
-							        <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							        <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                    <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                                 </tr>
                             <?php
                             }
@@ -218,7 +224,8 @@ $locate = $location->completeRide($Connection->con);
                                     <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                     <td><?php echo $value['customer_user_id']; ?></td>
                                     
-							        <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							        <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                    <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                                 </tr>
                             <?php
                             }
@@ -238,7 +245,8 @@ $locate = $location->completeRide($Connection->con);
                                     <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                     <td><?php echo $value['customer_user_id']; ?></td>
                                     
-							        <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							        <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                    <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                                 </tr>
                             <?php
                             }
@@ -258,7 +266,8 @@ $locate = $location->completeRide($Connection->con);
                                     <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                     <td><?php echo $value['customer_user_id']; ?></td>
                                    
-							        <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							        <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                    <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                                 </tr>
                             <?php
                             }
@@ -280,7 +289,8 @@ $locate = $location->completeRide($Connection->con);
                                 <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                 <td><?php echo $value['customer_user_id']; ?></td>
                                
-							    <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							    <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                             </tr>
                         <?php
                         }
@@ -302,7 +312,8 @@ $locate = $location->completeRide($Connection->con);
                                 <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                 <td><?php echo $value['customer_user_id']; ?></td>
                                 
-							    <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							    <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                             </tr>
                         <?php
                         }
@@ -322,7 +333,8 @@ $locate = $location->completeRide($Connection->con);
                                 <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                 <td><?php echo $value['customer_user_id']; ?></td>
                                
-							    <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							    <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                             </tr>
                         <?php
                         }
@@ -342,7 +354,8 @@ $locate = $location->completeRide($Connection->con);
                                 <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                 <td><?php echo $value['customer_user_id']; ?></td>
                                
-							    <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							    <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                             </tr>
                         <?php
                         }
@@ -362,7 +375,8 @@ $locate = $location->completeRide($Connection->con);
                                 <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                 <td><?php echo $value['customer_user_id']; ?></td>
                                
-							    <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							    <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                             </tr>
                         <?php
                         }
@@ -381,7 +395,8 @@ $locate = $location->completeRide($Connection->con);
                                 <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                                 <td><?php echo $value['customer_user_id']; ?></td>
                                 
-							    <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							    <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                             </tr>
                         <?php
                         }
@@ -404,7 +419,8 @@ $locate = $location->completeRide($Connection->con);
                             <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                             <td><?php echo $value['customer_user_id']; ?></td>
                             
-							<td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+							<!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                         </tr>
                     <?php
                    } }?>

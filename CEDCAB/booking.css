@@ -52,6 +52,9 @@ label, input{
     font-weight: bold;
 }
 
+.label{
+    color: black;
+}
 select{
     width: 500px;
     appearance: none;

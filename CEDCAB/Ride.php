@@ -27,11 +27,13 @@
 
         function invoice($con){
             
+            $id = $_GET['id'];
+            
             $data =array();
 
             $user_id = $_SESSION['user']['id'];
             
-            $sql = "SELECT * FROM `tbl_ride` WHERE `customer_user_id` = '$user_id' AND `status` = '2'";
+            $sql = "SELECT * FROM `tbl_ride` WHERE `ride_id` = '$id'";
         
             $query = $con->query($sql);
             
@@ -121,6 +123,22 @@
                     }
                     return $data;
                 }
+            }elseif($selected == "No filter"){
+                $data =array();
+
+            $user_id = $_SESSION['user']['id'];
+            
+            $sql = "SELECT * FROM `tbl_ride` WHERE `customer_user_id` = '$user_id' AND `status` = '1'";
+        
+            $query = $con->query($sql);
+            
+            if ($query->num_rows > 0) {
+
+                while($row = $query->fetch_assoc()){
+                    $data[] = $row;
+                }
+                return $data;
+            }
             }
             elseif($selected == "CedMicro"){
                 $user_id = $_SESSION['user']['id'];
@@ -363,8 +381,8 @@
                 if ($query->num_rows > 0) {
 
                     while($row = $query->fetch_assoc()){
-                        print_r( $row);
-                        echo "</br>";
+                        // print_r( $row);
+                        // echo "</br>";
                         $data[] = $row;
                     }
                     return $data;
@@ -379,8 +397,8 @@
                 if ($query->num_rows > 0) {
 
                     while($row = $query->fetch_assoc()){
-                        print_r( $row);
-                        echo "</br>";
+                        // print_r( $row);
+                        // echo "</br>";
                         $data[] = $row;
                     }
                     return $data;
@@ -395,8 +413,8 @@
                 if ($query->num_rows > 0) {
 
                     while($row = $query->fetch_assoc()){
-                        print_r( $row);
-                        echo "</br>";
+                        // print_r( $row);
+                        // echo "</br>";
                         $data[] = $row;
                     }
                     return $data;
@@ -411,8 +429,8 @@
                 if ($query->num_rows > 0) {
 
                     while($row = $query->fetch_assoc()){
-                        print_r( $row);
-                        echo "</br>";
+                        // print_r( $row);
+                        // echo "</br>";
                         $data[] = $row;
                     }
                     return $data;

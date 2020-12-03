@@ -20,6 +20,7 @@ $locate = $location->place($Connection->con);
     </head>
     <body>
         <div class="navbar">
+        <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span style="color:chartreuse">CAB</span></a>
             <a href="admin.php">Dashboard</a>
             <div class="dropdown">
                 <button class="dropbtn">User</button>
@@ -71,9 +72,9 @@ $locate = $location->place($Connection->con);
                             <td><?php echo $value['id']; ?></td>
                             <td><?php echo $value['name']; ?></td>
                             <td><?php echo $value['distance']; ?></td>
-                            <td><?php echo $value['is_available']; ?></td>
-                            <td><a href="editLocation.php?id=<?php echo $value['id']; ?>" title='Edit'>EDIT</a></td>
-							<td><a href="deleteLocation.php?id=<?php echo $value['id']; ?>" title='Delete'>DELETE</a></td>
+                            <td><?php if($value['is_available'] == 1) { echo "Available";} else{ echo "Unavailable";}?></td>
+                            <td><a href="editLocation.php?id=<?php echo $value['id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+							<td><a href="deleteLocation.php?id=<?php echo $value['id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
                         </tr>
                     <?php
                     }?>

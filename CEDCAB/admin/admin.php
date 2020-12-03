@@ -15,6 +15,8 @@
     $pendingRides = $admin->pendingRides($Connection->con);
     $pendingUsers = $admin->pendingUsers($Connection->con);
 
+    $pendingLast = $admin->pendingLast($Connection->con);
+
     if (!isset($_SESSION['user']['username'])) {     
         echo '<script>alert("You are logged out")</script>';
     ?>
@@ -42,12 +44,15 @@
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="sidebar.css">
     </head>
     <body>
         <div class="navbar">
+        <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span style="color:chartreuse">CAB</span></a>
             <a href="admin.php">Dashboard</a>
             
             <a href="changeadminPassword.php">Change password </a>
+            
             <a href="../logout.php">Logout</a>  
         </div>
         <div class="grid-container">
@@ -55,6 +60,39 @@
                 <?php $name = $_SESSION['user']['username'];?>
                 <h1 style = 'background-color: pink;text-align :center;'>
                     Welcome to the Admin Panel, ' <?php echo $name;?> ' !!</h1>
+
+                    <table>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Pick</th>
+                <th>Drop</th>
+                <th>Cabtype</th>
+                <th>Distance</th>
+                <th>Luggage</th>
+                <th>Total_fare</th>
+                <th>Status</th>
+                <th>User_id</th>     
+                </tr> 
+                    <?php
+                    foreach($pendingLast as $value){
+                    ?>
+                        
+                    <tr>
+                        <td><?php echo $value['ride_id']; ?></td>
+                        <td><?php echo $value['ride_date']; ?></td>
+                        <td><?php echo $value['pick_place']; ?></td>
+                        <td><?php echo $value['drop_place']; ?></td>
+                        <td><?php echo $value['cab_type']; ?></td>
+                        <td><?php echo $value['total_distance']; ?></td>
+                        <td><?php echo $value['luggage']; ?></td>
+                        <td><?php echo $value['total_fare']; ?></td>
+                        <td style ="background-color: red;"><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                        <td><?php echo $value['customer_user_id']; ?></td>
+                            
+                    <?php
+                    } ?>
+               </table>
             </div>
             <div class="item2">
                 <div class="main">
@@ -70,7 +108,8 @@
                                 </div>
                             </div>
                             <ul class="list-sidebar bg-defoult">
-                                <li> <a href="admin.php"><i class="fa fa-diamond"></i> <span class="nav-label">Dashboard</span></a> 
+                                <li> 
+                                <a href="admin.php"><i class="fa fa-diamond"></i> <span class="nav-label">Dashboard</span></a> 
                                 <li> <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active" > <i class="fa fa-th-large"></i> <span class="nav-label"> User </span> <span class="fa fa-chevron-left pull-right"></span> </a>
                                     <ul class="sub-menu collapse" id="dashboard">
                                         <li class="active"><a href="adduser.php">Add User</a></li>
@@ -96,7 +135,7 @@
                                     
                                 </ul>
                                 </li>
-                                
+
                                 <li> <a href="../logout.php"><i class="fa fa-files-o"></i> <span class="nav-label">Logout</span></a></li>
                             </ul>
                         </div>
@@ -113,7 +152,7 @@
                     foreach ($totalEarn as $value){
                         $display += $value['total_fare']; 
                     }
-                    echo $display;
+                    echo " Rs.".$display."/-";
                 ?>
             
                 </div>
@@ -128,9 +167,11 @@
             </div>
             <div class="item5 tile" id="item5">
                 <div class="tile1">
-                    <a href="pendinguser.php" class="anchor">Pending User request</a>
+                    <a href="pendingUser.php" class="anchor">Pending User request</a>
                     <?php echo "</br>".$pendingUsers;?>
+                    
                 </div>
+                
             </div>
             <div class="item6 tile" id="item2">
                 <div class="tile1">

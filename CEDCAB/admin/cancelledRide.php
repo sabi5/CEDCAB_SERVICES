@@ -22,6 +22,7 @@
     </head>
     <body>
         <div class="navbar">
+        <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span style="color:chartreuse">CAB</span></a>
             <a href="admin.php">Dashboard</a>
             
             <div class="dropdown">
@@ -49,7 +50,7 @@
                     <a href="addLocation.php">Add New Location</a>
                 </div>
             </div> 
-            
+            <!-- <a href="invoice.php">Invoice</a>   -->
             <a href="../logout.php">Logout</a>  
         </div>
   
@@ -86,8 +87,9 @@
                     <td><?php echo $value['total_fare']; ?></td>
                     <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                     <td><?php echo $value['customer_user_id']; ?></td>
-                    <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>EDIT</a></td>
-                    <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete'>DELETE</a></td>
+                    <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                    <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                    <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
                 </tr>
             <?php
             }?>
