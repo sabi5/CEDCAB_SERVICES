@@ -11,6 +11,11 @@ if (!isset($_SESSION['user']['username'])) {
    ?>
    <script>location.replace("login.php")</script> 
     <?php
+}elseif(($_SESSION['user']['is_admin'] != 0)){
+    echo '<script>alert("You are unauthorised person")</script>';
+    ?>
+<script>location.replace("admin/admin.php")</script> 
+    <?php
 }
 
 
@@ -21,22 +26,25 @@ if (isset($_POST['submit'])) {
     // echo $repassword;
 
     if($password == $repassword){
-        echo '<script> alert("")</script>';
+        echo '<script> alert("please input new password")</script>';
 
-    }
+    }elseif($password != $repassword){
     
-    $insert = " UPDATE `tbl_user` SET `password` = '$repassword'
-                WHERE  `user_id` = '$ids' ";
-    // echo $insert;
-    
-    $uquery = mysqli_query($conn, $insert);
-    // echo $uquery;
-    
-    if ($uquery) {
-        echo '<script> alert("Updated successfully")</script>';
-        ?>
-        <script>location.replace("login.php")</script>
-        <?php
+        $insert = " UPDATE `tbl_user` SET `password` = '$repassword'
+                    WHERE  `user_id` = '$ids' ";
+        // echo $insert;
+        
+        $uquery = mysqli_query($conn, $insert);
+        // echo $uquery;
+        
+        if ($uquery) {
+            echo '<script> alert("Updated successfully")</script>';
+            session_destroy();
+            ?>
+            <!-- <script>location.replace("logout.php")</script> -->
+            <script>location.replace("login.php")</script>
+            <?php
+        }
     }
 }
 
@@ -70,7 +78,7 @@ if ($row) {
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                     <nav class="navbar navbar-expand-md navbar-light bg-dark">
                         <div class="container ">
-                            <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span id="cab">CAB</span></a>
+                            <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span style="color:chartreuse">CAB</span></a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
@@ -97,7 +105,7 @@ if ($row) {
                     
                     <p>
                         <label for="password">Old Password : <input type="password" 
-                        name="password" value="<?php  echo $password; ?>" required></label>
+                        name="password" required></label>
                     </p>
                     <p>
                         <label for="password2">New Password : <input type="password" 

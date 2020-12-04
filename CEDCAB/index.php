@@ -463,19 +463,19 @@
             
             function myfunc(){
                
-                // var x = document.getElementById("select").value;
-                
-                if($final_fare){
-                    document.getElementById("button").style.display = "flex";
-                } else {
-                    document.getElementById("button").style.display = "none";
-                }
-            }
+               var x = document.getElementById("select").value;
+               
+               if(x == "CedMicro"){
+                   document.getElementById("lug").style.display = "none";
+               } else {
+                   document.getElementById("lug").style.display = "flex";
+               }
+           }
             function myFunction() {
                 var x;
                 x = document.getElementById("lug").value;
 
-                if ((event.keyCode > 48) && (event.keyCode < 58)) {
+                if ((event.keyCode >= 48) && (event.keyCode <= 57)) {
                     return true;
                 } else {
                     alert('Please enter numeric value only !');

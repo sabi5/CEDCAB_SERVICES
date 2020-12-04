@@ -6,6 +6,13 @@ require "../Dbconnection.php";
 $Connection = new Dbconnection();
 $conn = $Connection->con;
 
+// if(($_SESSION['user']['is_admin'] != 1)){
+//     echo '<script>alert("You are unauthorised person")</script>';
+//     ?>
+<!-- // <script>location.replace("../customer.php")</script>  -->
+     <?php
+// }
+
 if (isset($_POST['submit'])) {
     $id = $_POST['id'];
     
@@ -24,7 +31,7 @@ if (isset($_POST['submit'])) {
 }
 
 $id = $_GET['id'];
-echo $id;
+// echo $id;
 
 $query = "SELECT *FROM `tbl_user` WHERE `user_id`='$id'";
 $result = mysqli_query($conn, $query)or die($mysqli_error($conn));
@@ -32,7 +39,7 @@ $row = mysqli_fetch_assoc($result);
 if ($row) {
 
     $isblock= $row['isblock'];
-    echo $isblock;
+    // echo $isblock;
 } else {
         echo '<script> alert("No data found"); </script>';
 }
@@ -47,7 +54,7 @@ if ($row) {
         <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
     </head>
     <body>
-    <header>
+        <header>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                     <nav class="navbar navbar-expand-md navbar-light bg-dark">
@@ -78,8 +85,17 @@ if ($row) {
                 <form action="edituserAdmin.php" method="POST">
                    
                     <p>
-                        <label for="number">Status : <input type="number" name="isblock" 
-                        value="<?php  if($isblock == "BLOCK"){echo "0";} else{echo "1";} ?>" required></label>
+                    
+                        <label for="available">Status :
+                        <select name = "isblock"  required>
+                            <option value="" disabled selected><?php if($isblock == 1){echo "Unblock";}else{ echo "Block"; }?></option>
+                            <option value="1">Unblock</option>
+                            <option value="0">Block</option>
+                           
+                        </select>
+                    
+                        <!-- <label for="number">Status : <input type="number" name="isblock" 
+                        value="<?php  if($isblock == "BLOCK"){echo "0";} else{echo "1";} ?>" required></label> -->
                     </p> 
 					<input type="hidden" name="id" value="<?php  echo $id; ?>" 
 					style="display:none;">
@@ -94,7 +110,7 @@ if ($row) {
         </div>
         <!-- footer -->
         <footer  style="background-color: #2c292f">
-            <div class="container" style="margin-top: 50px;">
+            <div class="container" style="margin-top: 150px;">
                 <div class="row ">
                     <div class="col-md-4 text-center text-md-left ">
                         

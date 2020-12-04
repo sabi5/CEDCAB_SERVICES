@@ -13,6 +13,11 @@ if (!isset($_SESSION['user']['username'])) {
    ?>
    <script>location.replace("login.php")</script> 
     <?php
+}elseif(($_SESSION['user']['is_admin'] != 0)){
+    echo '<script>alert("You are unauthorised person")</script>';
+    ?>
+<script>location.replace("admin/admin.php")</script> 
+    <?php
 }
 ?>
 
@@ -135,9 +140,9 @@ if (!isset($_SESSION['user']['username'])) {
                 <th>Pick</th>
                 <th>Drop</th>
                 <th>Cabtype</th>
-                <th>Distance</th>
-                <th>Luggage</th>
-                <th>Total_fare</th>
+                <th>Distance (in km)</th>
+                <th>Luggage (in kg)</th>
+                <th>Total_fare (in Rs.)</th>
                 <th>Status</th>
                 <th>User_id</th> 
             </tr>

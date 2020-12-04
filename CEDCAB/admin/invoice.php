@@ -17,7 +17,6 @@ if (!isset($_SESSION['user']['username'])) {
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -28,7 +27,7 @@ if (!isset($_SESSION['user']['username'])) {
     </head>
     <body>
         <div class="navbar">
-        <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span id="cab">CAB</span></a>
+        <a class="navbar-brand text-warning font-weight-bold" href="#"><span>CED </span><span style="color:chartreuse">CAB</span></a>
             <a href="admin.php">Dashboard</a>
             
             <div class="dropdown">
@@ -39,8 +38,6 @@ if (!isset($_SESSION['user']['username'])) {
                     <a href="allRide.php">All Rides</a>
                 </div>
             </div> 
-            <!-- <a href="bookRide.php">Book new ride </a> -->
-            <!-- <a href="invoice.php">Invoice</a>  -->
             <a href="../logout.php">Logout</a>  
             
         </div>
@@ -49,53 +46,47 @@ if (!isset($_SESSION['user']['username'])) {
     
         $name = $_SESSION['user']['username'];
         echo "<h1 style = 'background-color: pink;text-align :center;'>
-         Welcome ,'".$name."'!! Thanks for using our services...</h1>";?>
+         Welcome , ' ".$_SESSION['ride_username']." ' !! Thanks for using our services...</h1>";?>
         <h1 style="text-align: center;">Invoice</h1>
-
-       
 
         <div>
             <button style = 'background-color: lightgreen;' onclick="window.print()">Print</button>
         </div>
         <br>
-        <table>
+        <table id ="customers">
             <tr>
                 <th>Id</th>
                 <th>Date</th>
                 <th>Pick</th>
                 <th>Drop</th>
                 <th>Cabtype</th>
-                <th>Distance</th>
-                <th>Luggage</th>
-                <th>Total_fare</th>
+                <th>Distance (in km)</th>
+                <th>Luggage (in kg)</th>
+                <th>Total_fare (in Rs.)</th>
                 <th>Status</th>
                 <th>User_id</th> 
             </tr>
-            
+            <?php
+                $id = $_GET['id'];
+                // echo $id;
+                
+                foreach($locate as $value){
+                ?> 
+                    <tr>
+                        <td><?php echo $value['ride_id']; ?></td>
+                        <td><?php echo $value['ride_date']; ?></td>
+                        <td><?php echo $value['pick_place']; ?></td>
+                        <td><?php echo $value['drop_place']; ?></td>
+                        <td><?php echo $value['cab_type']; ?></td>
+                        <td><?php echo $value['total_distance']; ?></td>
+                        <td><?php echo $value['luggage']; ?></td>
+                        <td><?php echo $value['total_fare']; ?></td>
+                        <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";} ?></td>
+                        <td><?php echo $value['customer_user_id']; ?></td>
+                    </tr>
                 <?php
-                    
-                    // $id = $_GET['id'];
-                    // echo $id;
-                        foreach($locate as $value){
-
-                        ?>
-                            
-                            <tr>
-                                <td><?php echo $value['ride_id']; ?></td>
-                                <td><?php echo $value['ride_date']; ?></td>
-                                <td><?php echo $value['pick_place']; ?></td>
-                                <td><?php echo $value['drop_place']; ?></td>
-                                <td><?php echo $value['cab_type']; ?></td>
-                                <td><?php echo $value['total_distance']; ?></td>
-                                <td><?php echo $value['luggage']; ?></td>
-                                <td><?php echo $value['total_fare']; ?></td>
-                                <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";} ?></td>
-                                <td><?php echo $value['customer_user_id']; ?></td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-              
+                }
+            ?>  
         </table>
         </div>
     </body>

@@ -5,6 +5,12 @@ session_start();
 require "Dbconnection.php";
 require "User.php";
 
+if(isset($_SESSION['user']['username']) && $_SESSION['user']['is_admin'] == 1){
+    echo  "<script>location.replace('admin/admin.php');</script>";
+}elseif(isset($_SESSION['user']['username']) && $_SESSION['user']['is_admin'] == 0){
+    echo  "<script>location.replace('customer.php');</script>";
+}
+
 if (isset($_POST['submit'])){
     $email = $_POST['email'];
     $password = $_POST['password'];

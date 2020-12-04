@@ -9,6 +9,12 @@ $location = new Admin();
 $locate = $location->pendingUser($Connection->con);
 // echo $locate;
 
+// if(($_SESSION['user']['is_admin'] != 1)){
+//     echo '<script>alert("You are unauthorised person")</script>';
+//     ?>
+<!-- // <script>location.replace("../customer.php")</script>  -->
+ <?php
+// }
 
 ?>
 

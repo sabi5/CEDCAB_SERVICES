@@ -30,16 +30,22 @@
                 if ($namecount > 0) {
                     echo("<script>alert('Location already exists');</script>");
                 } else {
-                    
-                    $insertquery = "INSERT INTO `tbl_location` (name, distance, is_available) 
-                            VALUES ('$name', '$distance', '1')";
-        
-                    $iquery = mysqli_query($con, $insertquery);
-                    
-                    if ($iquery) {
-                        echo "<script>alert('Inserted Successful');</script>";
+            
+                    if (!preg_match('/^[a-zA-Z]+[a-zA-Z0-9._]+$/', $name)) {
+                        echo("<script>alert('Please insert valid location');</script>");
                     } else {
-                        echo "<script>alert('Not inserted');</script>";
+                    
+                    
+                        $insertquery = "INSERT INTO `tbl_location` (name, distance, is_available) 
+                                VALUES ('$name', '$distance', '1')";
+            
+                        $iquery = mysqli_query($con, $insertquery);
+                        
+                        if ($iquery) {
+                            echo "<script>alert('Inserted Successful');</script>";
+                        } else {
+                            echo "<script>alert('Not inserted');</script>";
+                        }
                     }
                     
                 }

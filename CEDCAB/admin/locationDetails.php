@@ -6,7 +6,12 @@ $Connection = new Dbconnection();
 $location = new Location();  
 $locate = $location->place($Connection->con);
 
-
+// if(($_SESSION['user']['is_admin'] != 1)){
+//     echo '<script>alert("You are unauthorised person")</script>';
+//     ?>
+<!-- // <script>location.replace("../customer.php")</script>  -->
+   <?php
+// }
 
 ?>
 
@@ -58,7 +63,7 @@ $locate = $location->place($Connection->con);
                 <th>ID</th>
                 <th>Name</th>
                 <th>Distance</th>
-                <th>Is_available</th>
+                <th>status</th>
                 <th>Action</th>
                 
             </tr>

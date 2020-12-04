@@ -3,50 +3,61 @@
     require "Dbconnection.php";
     // require "User.php";
 
+    if(($_SESSION['user']['is_admin'] != 0)){
+        echo '<script>alert("You are unauthorised person")</script>';
+        ?>
+    <script>location.replace("admin/admin.php")</script> 
+        <?php
+    }
+
     $Connection = new Dbconnection();
     $conn = $Connection->con;
 
-    if (isset($_POST['submit'])) {
+
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+
+        $query = "SELECT *FROM `tbl_user` WHERE `user_id`='$id'";
+        $result = mysqli_query($conn, $query)or die($mysqli_error($conn));
+        $row = mysqli_fetch_assoc($result); 
+        if ($row) {
+            $username= $row['username'];
+        
+            $mobile= $row['mobile'];
+        } else {
+                echo '<script> alert("No data found"); </script>';
+        }
+    }
+
+    elseif (isset($_POST['submit'])) {
         $id = $_POST['id'];
         $username = $_POST['username'];
         // $password = $_POST['password'];
         // $email = $_POST['email'];
         $mobile = $_POST['mobile'];
 
-        if ( ctype_alpha($username))  
+        if ( !ctype_alpha($username))  {
         
-            echo "<script>alert('yes');</script>"; 
-        else 
             echo "<script>alert('Enter alphabets only');</script>"; 
-
-        $insert = " UPDATE tbl_user SET `username` = '$username', 
-                `mobile`='$mobile' WHERE  `user_id` = '$id' ";
         
-        $uquery = mysqli_query($conn, $insert);
+        }else {
+            $id = $_POST['id'];
+            $insert = " UPDATE tbl_user SET `username` = '$username', 
+                    `mobile`='$mobile' WHERE  `user_id` = '$id' ";
+            
+            $uquery = mysqli_query($conn, $insert);
 
-        $_SESSION['user']['username'] = $username;
-        
-        if ($uquery) {
-            echo '<script> alert("Updated successfully")</script>';
-            ?>
-            <script>location.replace("customer.php")</script>
-            <?php
+            $_SESSION['user']['username'] = $username;
+            
+            if ($uquery) {
+                echo '<script> alert("Updated successfully")</script>';
+                ?>
+                <script>location.replace("customer.php")</script>
+                <?php
+            }
         }
     }
 
-    $id = $_GET['id'];
-
-    $query = "SELECT *FROM `tbl_user` WHERE `user_id`='$id'";
-    $result = mysqli_query($conn, $query)or die($mysqli_error($conn));
-    $row = mysqli_fetch_assoc($result); 
-    if ($row) {
-        $username= $row['username'];
-       
-        $mobile= $row['mobile'];
-    } else {
-            echo '<script> alert("No data found"); </script>';
-    }
-  
 ?>
 <html>
     <head>
@@ -93,7 +104,7 @@
                     
                     <p>
                         <label for="number">Mobile no. : <input type="number" name="mobile" 
-                        value="<?php  echo $mobile; ?>" required></label>
+                        value="<?php  echo $mobile; ?>" required></label> (Must be 10 digits only)
                     </p> 
 					<input type="hidden" name="id" value="<?php  echo $id; ?>" 
 					style="display:none;">

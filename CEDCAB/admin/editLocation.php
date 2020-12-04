@@ -6,37 +6,50 @@ require "../Dbconnection.php";
 $Connection = new Dbconnection();
 $conn = $Connection->con;
 
-if (isset($_POST['submit'])) {
+// if(($_SESSION['user']['is_admin'] != 1)){
+//     echo '<script>alert("You are unauthorised person")</script>';
+//     ?>
+<!-- // <script>location.replace("../customer.php")</script>  -->
+  <?php
+// }
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+
+    $query = "SELECT *FROM `tbl_location` WHERE `id`='$id'";
+    $result = mysqli_query($conn, $query)or die($mysqli_error($conn));
+    $row = mysqli_fetch_assoc($result); 
+    if ($row) {
+        $name = $row['name'];
+        $distance = $row['distance'];
+        $is_available = $row['is_available'];
+    } else {
+        echo '<script> alert("No data found"); </script>';
+    }
+  
+}elseif (isset($_POST['submit'])) {
     $id = $_POST['id'];
     $name = $_POST['name'];
     $distance = $_POST['distance'];
     $is_available = $_POST['select'];
-    echo $is_available;
+    // echo $is_available;
 
-    $insert = "UPDATE `tbl_location` SET `name` = '$name', `distance`='$distance', `is_available` = '$is_available' WHERE `id` = '$id' ";
-    
-    $uquery = mysqli_query($conn, $insert);
-    
-    if ($uquery) {
-        echo '<script> alert("Updated successfully")</script>';
-        ?>
-        <script>location.replace("admin.php")</script>
-        <?php
+    if (!preg_match('/^[a-zA-Z]+[a-zA-Z0-9._]+$/', $name)) {
+        echo("<script>alert('Please insert valid location');</script>");
+    }else{
+
+        $insert = "UPDATE `tbl_location` SET `name` = '$name', `distance`='$distance', `is_available` = '$is_available' WHERE `id` = '$id' ";
+        
+        $uquery = mysqli_query($conn, $insert);
+        
+        if ($uquery) {
+            echo '<script> alert("Updated successfully")</script>';
+            ?>
+            <script>location.replace("admin.php")</script>
+            <?php
+        }
     }
 }
 
-$id = $_GET['id'];
-
-$query = "SELECT *FROM `tbl_location` WHERE `id`='$id'";
-$result = mysqli_query($conn, $query)or die($mysqli_error($conn));
-$row = mysqli_fetch_assoc($result); 
-if ($row) {
-    $name = $row['name'];
-    $distance = $row['distance'];
-    $is_available = $row['is_available'];
-} else {
-        echo '<script> alert("No data found"); </script>';
-}
   
 ?>
 <html>
@@ -86,14 +99,13 @@ if ($row) {
                         name="distance" value="<?php echo $distance;?>" required></label>
                     </p>
                     <p>
-                    <label for="available">Is_available :<select name="select" required>
-                            <option value="" disabled selected><?php echo $is_available;?></option>
+                        <label for="available">Is_available :
+                        <select name="select" required>
+                            <option value="" disabled selected><?php if($is_available == 1){echo "Available";}else{ echo "Unavailable"; }?></option>
                             <option value="1">Available</option>
                             <option value="0">Unavailable</option>
                            
                         </select>
-                        <!-- <input type="submit" name="filter" value="FILTER" class="filter"> -->
-                    
                     </p>
                     <p>
                         <!-- s -->

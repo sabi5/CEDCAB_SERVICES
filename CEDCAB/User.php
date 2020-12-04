@@ -66,40 +66,47 @@ class User {
 
     function signup($username, $password, $repassword, $email, $mobile, $con){
 
-        if (isset($_POST['submit'])) {
+            if (isset($_POST['submit'])) {
+                
+                $length = strlen ($mobile);  
+              
+                if ( !ctype_alpha($username)) { 
+            
+                    echo "<script>alert('Username must contain letters only');</script>";
 
-            if ( ctype_alpha($username))  
-      
-                echo "<script>alert('yes');</script>"; 
-            else 
-                echo "<script>alert('Enter alphabets only');</script>"; 
-        
-            $emailquery = "SELECT * FROM tbl_user WHERE email='$email'";
-            $query = mysqli_query($con, $emailquery);
-        
-            $emailcount = mysqli_num_rows($query);
-        
-            if ($emailcount > 0) {
-                echo("<script>alert('Email already exists');</script>");
-            } else {
-                if ($password === $repassword) {
-                    $insertquery = "INSERT INTO tbl_user (username, email, dateofsignup, mobile, isblock, password, is_admin) 
-                            VALUES ('$username', '$email', NOW(), '$mobile', 0, '$password',0)";
-        
-                    $iquery = mysqli_query($con, $insertquery);
+                }elseif( $length < 10 || $length > 10) {  
+                    echo "<script>alert('Mobile must have 10 digits');</script>";
 
-
-                    
-                    if ($iquery) {
-                        echo "<script>alert('Inserted Successful');</script>";
+                }else{
+            
+                    $emailquery = "SELECT * FROM tbl_user WHERE email='$email'";
+                    $query = mysqli_query($con, $emailquery);
+                
+                    $emailcount = mysqli_num_rows($query);
+                
+                    if ($emailcount > 0) {
+                        echo("<script>alert('Email already exists');</script>");
                     } else {
-                        echo "<script>alert('Not inserted');</script>";
+                        if ($password === $repassword) {
+                            $insertquery = "INSERT INTO tbl_user (username, email, dateofsignup, mobile, isblock, password, is_admin) 
+                                    VALUES ('$username', '$email', NOW(), '$mobile', 0, '$password',0)";
+                
+                            $iquery = mysqli_query($con, $insertquery);
+
+
+                            
+                            if ($iquery) {
+                                echo "<script>alert('Inserted Successful');</script>";
+                            } else {
+                                echo "<script>alert('Not inserted');</script>";
+                            }
+                        } else {
+                            echo("<script>alert('Password not matched');</script>");
+                        }
                     }
-                } else {
-                    echo("<script>alert('Password not matched');</script>");
                 }
             }
-        }
+        
     }
 
     function customerProfile($con){

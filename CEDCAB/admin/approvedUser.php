@@ -8,7 +8,12 @@
     $location = new Admin();  
     $locate = $location->approvedUser($Connection->con);
     
-
+    // if(($_SESSION['user']['is_admin'] != 1)){
+    //     echo '<script>alert("You are unauthorised person")</script>';
+    //     ?>
+    <!-- // <script>location.replace("../customer.php")</script>  -->
+    <?php
+    // }
 ?>
 
 <!-- *********************  filter -->

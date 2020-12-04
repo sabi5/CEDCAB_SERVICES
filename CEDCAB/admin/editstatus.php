@@ -6,6 +6,13 @@ require "../Dbconnection.php";
 $Connection = new Dbconnection();
 $conn = $Connection->con;
 
+// if(($_SESSION['user']['is_admin'] != 1)){
+//     echo '<script>alert("You are unauthorised person")</script>';
+//     ?>
+<!-- // <script>location.replace("../customer.php")</script>  -->
+    <?php
+// }
+
 if (isset($_POST['submit'])) {
     $id = $_POST['id'];
     $status = $_POST['status'];

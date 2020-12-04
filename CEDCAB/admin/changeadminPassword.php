@@ -19,12 +19,9 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $repassword = $_POST['password2'];
    
-
-    // if($password == $repassword){
-    //     echo '<script> alert("incorrect Password")</script>';
-
+    // if($passwordOld == $password){
+    //     echo '<script>alert("please insert correct Old Password")</script>';
     // }
-    
     $insert = " UPDATE `tbl_user` SET `password` = '$repassword'
                 WHERE  `user_id` = '$ids' ";
    
@@ -34,7 +31,9 @@ if (isset($_POST['submit'])) {
     
     if ($uquery) {
         echo '<script> alert("Updated successfully")</script>';
+        // session_destroy();
         ?>
+        <!-- <script>location.replace("../logout.php")</script> -->
         <script>location.replace("../login.php")</script>
         <?php
     }
@@ -47,7 +46,7 @@ $result = mysqli_query($conn, $query)or die($mysqli_error($conn));
 $row = mysqli_fetch_assoc($result); 
 if ($row) {
     
-    $password= $row['password'];
+    $passwordOld= $row['password'];
   
    
 } else {
@@ -96,19 +95,18 @@ if ($row) {
                     
                     <p>
                         <label for="password">Old Password : <input type="password" 
-                        name="password" value="<?php  echo $password; ?>" required></label>
+                        name="password" required></label>
                     </p>
                     <p>
                         <label for="password2">New Password : <input type="password" 
                         name="password2" required></label>
                     </p>
                     
-					<input type="hidden" name="id" value="<?php  echo $id; ?>" 
+					<input type="hidden" name="id" value="<?php echo $id; ?>" 
 					style="display:none;">
                     <p>
                         <input class="btn btn-success" type="submit" name="submit" value="Submit">
                     </p>
-                    
                 </form>
                 
                 <a href="admin.php"><button class="btn btn-warning">BACK</button> </a>

@@ -29,6 +29,17 @@
             
             $id = $_GET['id'];
             
+            $sqlname = "SELECT * FROM `tbl_ride` WHERE `ride_id` = '$id'";
+            $query = $con->query($sqlname);
+            $row = $query->fetch_assoc();
+            $userid = $row['customer_user_id'];
+
+            $sqlname = "SELECT * FROM `tbl_user` WHERE `user_id` = '$userid'";
+            $query = $con->query($sqlname);
+            $row = $query->fetch_assoc();
+            $name = $row['username'];
+            $_SESSION['ride_username'] = $name;
+
             $data =array();
 
             $user_id = $_SESSION['user']['id'];
@@ -40,6 +51,7 @@
             if ($query->num_rows > 0) {
 
                 while($row = $query->fetch_assoc()){
+
                     $data[] = $row;
                 }
                 return $data;

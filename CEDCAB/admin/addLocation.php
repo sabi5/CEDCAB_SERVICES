@@ -38,7 +38,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                     <nav class="navbar navbar-expand-md navbar-light bg-dark">
                         <div class="container ">
-                            <a class="navbar-brand text-warning font-weight-bold" href="admin.php"><span>CED </span><span id="cab">CAB</span></a>
+                            <a class="navbar-brand text-warning font-weight-bold" href="admin.php"><span>CED </span><span style="color:chartreuse">CAB</span></a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>

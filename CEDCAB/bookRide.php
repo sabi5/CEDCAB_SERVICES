@@ -10,7 +10,12 @@
    ?>
    <script>location.replace("login.php")</script> 
     <?php
-}
+    }elseif(($_SESSION['user']['is_admin'] != 0)){
+        echo '<script>alert("You are unauthorised person")</script>';
+        ?>
+    <script>location.replace("admin/admin.php")</script> 
+        <?php
+    }
 
 
     $cab_info =array(

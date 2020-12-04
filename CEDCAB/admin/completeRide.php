@@ -135,9 +135,9 @@ $locate = $location->completeRide($Connection->con);
                 <th>Pick</th>
                 <th>Drop</th>
                 <th>Cabtype</th>
-                <th>Distance</th>
-                <th>Luggage</th>
-                <th>Total_fare</th>
+                <th>Distance (in km)</th>
+                <th>Luggage (in kg)</th>
+                <th>Total_fare (in Rs.)</th>
                 <th>Status</th>
                 <th>User_id</th>   
                 <th>Action</th>             

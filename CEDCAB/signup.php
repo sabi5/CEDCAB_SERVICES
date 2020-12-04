@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
                         required></label>
                     </p>
                     <p>
-                        <label for="number">Mobile no. : <input type="number" name="mobile" class ="form-control" 
+                        <label for="number">Mobile no.(Must be 10 digits only) : <input type="number" name="mobile" class ="form-control" 
                         required></label>
                     </p> 
                     <!-- <p>
