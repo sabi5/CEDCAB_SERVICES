@@ -17,7 +17,6 @@
         <?php
     }
 
-
     $cab_info =array(
         "Charbagh"=>0, 
         "Indira Nagar"=>10,
@@ -385,33 +384,28 @@
                                 </div>
                                
                                 <p>
-                                    <input type="submit" name="submit" value="CALCULATE FARE" class="btn form-control font-weight-bold cabbutton" onclick="return confirm('Are you sure?')" required >
+                                    <input type="submit" name="submit" value="CALCULATE FARE" class="btn form-control font-weight-bold cabbutton" onclick="return confirm('Are you sure, you want to book your ride?')" required >
                                 </p>
                                 <p class="bg-info text-center ">
                                                
-                                            <?php
-                                                if(isset($final_fare)){
-                                                
-                                                    echo " FINAL FARE : Rs. ".$final_fare. " /-</br>";
-                                                    echo " DISTANCE : ".$distance. " km</br> ";
-                                                    echo " PICKUP : ".$pickup. "</br> ";
-                                                    echo " DROP : ".$drop. "</br> ";
-                                                    echo " LUGGAGE : ".$luggage. " kg</br> ";
-                                                    echo " CABTYPE : ".$cabtype. "</br> ";
-                                                    
-                                                    // echo "<script>alert('Inserted Successful');</script>";
-                                                // echo $final_fare;
-                                                $_SESSION['final'] = $final_fare;
-                                                // echo "final".$final_fare;
-                                                $sql = $ride->ride($pickup, $drop,$cabtype, $luggage, $distance, $final_fare, $Connection->con);
-                                                // echo $sql;
-                                                
-                                                }else{
-                                                    echo "";
-                                                }
+                                    <?php
+                                        if(isset($final_fare)){
                                         
-                                            ?>
+                                            echo " FINAL FARE : Rs. ".$final_fare. " /-</br>";
+                                            echo " DISTANCE : ".$distance. " km</br> ";
+                                            echo " PICKUP : ".$pickup. "</br> ";
+                                            echo " DROP : ".$drop. "</br> ";
+                                            echo " LUGGAGE : ".$luggage. " kg</br> ";
+                                            echo " CABTYPE : ".$cabtype. "</br> ";
+                                            
+                                            // echo "<script>alert('Inserted Successful');</script>";
+                                        $_SESSION['final'] = $final_fare;
+                                        $sql = $ride->ride($pickup, $drop,$cabtype, $luggage, $distance, $final_fare, $Connection->con);
+                                        }else{
+                                            echo "";
+                                        }
                                 
+                                    ?>
                                 </p>
                             </form>
                         </div>
@@ -426,6 +420,7 @@
                 
                 if(x == "CedMicro"){
                     document.getElementById("lug").style.display = "none";
+                    alert("Luggage facility is not available in CedMicro");
                 } else {
                     document.getElementById("lug").style.display = "flex";
                 }
@@ -469,9 +464,7 @@
                         <div class="py-2 my-4">
                             <div>
                                 <p class="text-white"> <i class="fa fa-map-marker mx-2 "></i>
-                                        309 - Rupa Solitaire,
-                                    Bldg. No. A - 1, Sector - 1
-                                    Mahape, Navi Mumbai - 400710</p>
+                                Gomti Nagar</p>
                             </div>
 
                             <div> 

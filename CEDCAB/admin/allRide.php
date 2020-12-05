@@ -53,6 +53,7 @@
         <title>All User Rides</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <link href="sidebar.css" type="text/css" rel="stylesheet">
     </head>
     <body>
@@ -89,7 +90,7 @@
         </div>
   
         
-        <h1 style="text-align: center;">All Rides</h1>
+        <h1 style="text-align: center;"><marquee>All Rides</marquee></h1>
 
         <!-- *********************** filter and sort-->
 
@@ -141,7 +142,8 @@
                 <th>Total_fare (in Rs.)</th>
                 <th>Status</th>
                 <th>User_id</th>  
-                <th>Action</th>              
+                <th>Action</th>    
+                <th>Invoice</th>           
                 
             </tr>
             
@@ -162,9 +164,9 @@
                         <td><?php echo $value['total_fare']; ?></td>
                         <td><?php if($value['status'] == 1) { echo "<p style ='background-color: red;'>Pending</p>";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                         <td><?php echo $value['customer_user_id']; ?></td>
-                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                         <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                     </tr>
                 <?php
                 }
@@ -183,9 +185,9 @@
                             <td><?php echo $value['total_fare']; ?></td>
                             <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                             <td><?php echo $value['customer_user_id']; ?></td>
-                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                             <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                         </tr>
                     <?php
                     }
@@ -204,9 +206,9 @@
                             <td><?php echo $value['total_fare']; ?></td>
                             <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                             <td><?php echo $value['customer_user_id']; ?></td>
-                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                             <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                         </tr>
                     <?php
                     }
@@ -225,9 +227,9 @@
                             <td><?php echo $value['total_fare']; ?></td>
                             <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                             <td><?php echo $value['customer_user_id']; ?></td>
-                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                             <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                                 </tr>
                             <?php
                             }
@@ -246,9 +248,9 @@
                             <td><?php echo $value['total_fare']; ?></td>
                             <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                             <td><?php echo $value['customer_user_id']; ?></td>
-                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                             <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                                 </tr>
                             <?php
                             }
@@ -267,9 +269,9 @@
                             <td><?php echo $value['total_fare']; ?></td>
                             <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                             <td><?php echo $value['customer_user_id']; ?></td>
-                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                             <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                         </tr>
                     <?php
                     }
@@ -291,9 +293,9 @@
                         <td><?php echo $value['total_fare']; ?></td>
                         <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                         <td><?php echo $value['customer_user_id']; ?></td>
-                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                         <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                     </tr>
                 <?php
                 }
@@ -314,9 +316,9 @@
                         <td><?php echo $value['total_fare']; ?></td>
                         <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                         <td><?php echo $value['customer_user_id']; ?></td>
-                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                         <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                     </tr>
                 <?php
                 }
@@ -335,9 +337,9 @@
                         <td><?php echo $value['total_fare']; ?></td>
                         <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                         <td><?php echo $value['customer_user_id']; ?></td>
-                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                         <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                     </tr>
                 <?php
                 }
@@ -356,15 +358,14 @@
                         <td><?php echo $value['total_fare']; ?></td>
                         <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                         <td><?php echo $value['customer_user_id']; ?></td>
-                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                         <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                     </tr>
                 <?php
                 }
             }elseif(isset($_POST['sort']) && $sort == "cab asc"){
-                foreach($cabtype as $value){
-                    
+                foreach($cabtype as $value){ 
                 ?>
                     <tr>
                         <td><?php echo $value['ride_id']; ?></td>
@@ -377,9 +378,9 @@
                         <td><?php echo $value['total_fare']; ?></td>
                         <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                         <td><?php echo $value['customer_user_id']; ?></td>
-                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                         <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                     </tr>
                 <?php
                 }
@@ -397,9 +398,9 @@
                         <td><?php echo $value['total_fare']; ?></td>
                         <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                         <td><?php echo $value['customer_user_id']; ?></td>
-                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                        <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                         <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                        <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                     </tr>
                 <?php
                 }
@@ -421,9 +422,9 @@
                     <td><?php echo $value['total_fare']; ?></td>
                     <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
                     <td><?php echo $value['customer_user_id']; ?></td>
-                    <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                    <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
                     <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
-                    <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'>INVOICE</a></td>
+                    <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                 </tr>
             <?php
             }}?>

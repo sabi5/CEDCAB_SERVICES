@@ -21,6 +21,7 @@ $locate = $location->place($Connection->con);
         <title>Location Details</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <link href="sidebar.css" type="text/css" rel="stylesheet">
     </head>
     <body>
@@ -57,7 +58,7 @@ $locate = $location->place($Connection->con);
         </div>
   
         
-        <h1 style="text-align: center;">Location Details</h1>
+        <h1 style="text-align: center;"><marquee>Location Details</marquee></h1>
         <table>
             <tr>
                 <th>ID</th>
@@ -65,6 +66,7 @@ $locate = $location->place($Connection->con);
                 <th>Distance</th>
                 <th>status</th>
                 <th>Action</th>
+                <th>Action</th> 
                 
             </tr>
             
@@ -78,8 +80,8 @@ $locate = $location->place($Connection->con);
                             <td><?php echo $value['name']; ?></td>
                             <td><?php echo $value['distance']; ?></td>
                             <td><?php if($value['is_available'] == 1) { echo "Available";} else{ echo "Unavailable";}?></td>
-                            <td><a href="editLocation.php?id=<?php echo $value['id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
-							<td><a href="deleteLocation.php?id=<?php echo $value['id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
+                            <td><a href="editLocation.php?id=<?php echo $value['id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+							<td><a href="deleteLocation.php?id=<?php echo $value['id']; ?>" title='Delete' onclick="return confirm('Are you sure?')"><i class='fas fa-trash' style='font-size:24px'></i></a></td>
                         </tr>
                     <?php
                     }?>

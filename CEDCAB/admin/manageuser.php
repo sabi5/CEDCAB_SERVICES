@@ -43,6 +43,7 @@ $locate = $location->user($Connection->con);
         <title>Manage User</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <link href="sidebar.css" type="text/css" rel="stylesheet">
     </head>
     <body>
@@ -77,8 +78,13 @@ $locate = $location->user($Connection->con);
             <!-- <a href="invoice.php">Invoice</a>   -->
             <a href="../logout.php">Logout</a>  
         </div>
-  
-        <h1 style="text-align: center;">Manage User</h1>
+        <!-- <marquee class="marq"
+             background-color="Green" 
+             direction="left" 
+             loop=""> 
+        Background color is green 
+    </marquee>  -->
+        <h1 style="text-align: center;"><marquee>Manage User</marquee></h1>
 
          <!-- *********************** filter and sort-->
 
@@ -126,7 +132,7 @@ $locate = $location->user($Connection->con);
                                 <!-- <td><?php echo $value['password']; ?></td>
                                 <td><?php echo $value['is_admin']; ?></td> -->
                                 <!-- <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit'>EDIT</a></td> -->
-                                <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
+                                <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')"><i class='fas fa-trash' style='font-size:24px'></i></a></td>
                             </tr>
                         <?php
                         }
@@ -146,7 +152,7 @@ $locate = $location->user($Connection->con);
                                 <!-- <td><?php echo $value['password']; ?></td>
                                 <td><?php echo $value['is_admin']; ?></td> -->
                                 <!-- <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit'>EDIT</a></td> -->
-                                <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
+                                <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')"><i class='fas fa-trash' style='font-size:24px'></i></a></td>
                             </tr>
                         <?php
                         }
@@ -164,7 +170,7 @@ $locate = $location->user($Connection->con);
                                 <!-- <td><?php echo $value['password']; ?></td>
                                 <td><?php echo $value['is_admin']; ?></td> -->
                                 <!-- <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit'>EDIT</a></td> -->
-                                <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
+                                <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')"><i class='fas fa-trash' style='font-size:24px'></i></a></td>
                             </tr>
                         <?php
                         }
@@ -182,7 +188,7 @@ $locate = $location->user($Connection->con);
                                 <!-- <td><?php echo $value['password']; ?></td>
                                 <td><?php echo $value['is_admin']; ?></td> -->
                                 <!-- <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit'>EDIT</a></td> -->
-                                <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
+                                <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')"><i class='fas fa-trash' style='font-size:24px'></i></a></td>
                             </tr>
                         <?php
                         }
@@ -201,7 +207,7 @@ $locate = $location->user($Connection->con);
                             <!-- <td><?php echo $value['password']; ?></td>
                             <td><?php echo $value['is_admin']; ?></td> -->
                             <!-- <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit'>EDIT</a></td> -->
-							<td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
+							<td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')"><i class='fas fa-trash' style='font-size:24px'></i></a></td>
                         </tr>
                     <?php
                    } }?>

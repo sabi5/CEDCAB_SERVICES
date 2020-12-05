@@ -42,10 +42,17 @@ if(isset($_GET['id'])){
         $uquery = mysqli_query($conn, $insert);
         
         if ($uquery) {
-            echo '<script> alert("Updated successfully")</script>';
-            ?>
-            <script>location.replace("admin.php")</script>
-            <?php
+            if($is_available == 1){
+                echo '<script> alert("Location is available now")</script>';
+                ?>
+                <script>location.replace("admin.php")</script>
+                <?php
+            }elseif($is_available == 0){
+                echo '<script> alert("Location is unavailable now")</script>';
+                ?>
+                <script>location.replace("admin.php")</script>
+                <?php
+            }
         }
     }
 }
@@ -107,16 +114,7 @@ if(isset($_GET['id'])){
                            
                         </select>
                     </p>
-                    <p>
-                        <!-- s -->
-                        <!-- <section name = "select">
-                            <option value="pending">Pending</option>
-                            <option value="completed">Completed</option>
-                            <option value="approved">Approved</option>
-                        </section> -->
-                         <!-- <input type="number" 
-                        name="available" value="<?php echo $is_available;?>" required></label> -->
-                    </p>
+                    
                     <input type="hidden" name="id" value="<?php  echo $id; ?>" 
 					style="display:none;">
                     <p>
@@ -154,9 +152,7 @@ if(isset($_GET['id'])){
                         <div class="py-2 my-4">
                             <div>
                                 <p class="text-white"> <i class="fa fa-map-marker mx-2 "></i>
-                                        309 - Rupa Solitaire,
-                                    Bldg. No. A - 1, Sector - 1
-                                    Mahape, Navi Mumbai - 400710</p>
+                                Gomti Nagar</p>
                             </div>
 
                             <div> 

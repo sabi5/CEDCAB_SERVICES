@@ -59,6 +59,7 @@ if (!isset($_SESSION['user']['username'])) {
         <title>All Ride Users</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <link href="admin/sidebar.css" type="text/css" rel="stylesheet">
     </head>
     <body>
@@ -91,7 +92,7 @@ if (!isset($_SESSION['user']['username'])) {
         $name = $_SESSION['user']['username'];
         echo "<h1 style = 'background-color: pink;text-align :center;'>
          Welcome , ' ".$name." ' !!</h1>";?>
-        <h1 style="text-align: center;">All Rides</h1>
+        <h1 style="text-align: center;"><marquee>All Rides</marquee></h1>
 
          <!-- *********************** filter and sort-->
 

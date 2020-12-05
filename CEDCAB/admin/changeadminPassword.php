@@ -1,57 +1,52 @@
 <?php
-session_start();
-require "../Dbconnection.php";
+    session_start();
+    require "../Dbconnection.php";
 
-if (!isset($_SESSION['user']['username'])) {     
-    echo '<script>alert("You are logged out")</script>';
-   ?>
-   <script>location.replace("../login.php")</script> 
-    <?php
-}
-
-
-
-$Connection = new Dbconnection();
-$conn = $Connection->con;
-
-if (isset($_POST['submit'])) {
-    $ids = $_POST['id'];
-    $password = $_POST['password'];
-    $repassword = $_POST['password2'];
-   
-    // if($passwordOld == $password){
-    //     echo '<script>alert("please insert correct Old Password")</script>';
-    // }
-    $insert = " UPDATE `tbl_user` SET `password` = '$repassword'
-                WHERE  `user_id` = '$ids' ";
-   
-    
-    $uquery = mysqli_query($conn, $insert);
-   
-    
-    if ($uquery) {
-        echo '<script> alert("Updated successfully")</script>';
-        // session_destroy();
-        ?>
-        <!-- <script>location.replace("../logout.php")</script> -->
-        <script>location.replace("../login.php")</script>
+    if (!isset($_SESSION['user']['username'])) {     
+        echo '<script>alert("You are logged out")</script>';
+    ?>
+    <script>location.replace("../login.php")</script> 
         <?php
     }
-}
 
-$id = $_SESSION['user']['id'];
+    $Connection = new Dbconnection();
+    $conn = $Connection->con;
 
-$query = "SELECT *FROM `tbl_user` WHERE `user_id`='$id'";
-$result = mysqli_query($conn, $query)or die($mysqli_error($conn));
-$row = mysqli_fetch_assoc($result); 
-if ($row) {
+    if (isset($_POST['submit'])) {
+        $ids = $_POST['id'];
+        $password = $_POST['password'];
+        $repassword = $_POST['password2'];
     
-    $passwordOld= $row['password'];
-  
-   
-} else {
-        echo '<script> alert("No data found"); </script>';
-}
+        if($password == $repassword){
+            echo '<script>alert("New password must be different")</script>';
+        }elseif($password != $repassword){
+            $insert = " UPDATE `tbl_user` SET `password` = '$repassword'
+                        WHERE  `user_id` = '$ids' ";
+            
+            $uquery = mysqli_query($conn, $insert);
+        
+            
+            if ($uquery) {
+                echo '<script> alert("Your password has been changed successfully, please login again")</script>';
+                session_destroy();
+                ?>
+                <!-- <script>location.replace("../logout.php")</script> -->
+                <script>location.replace("../login.php")</script>
+                <?php
+            }
+        }
+    }
+
+    $id = $_SESSION['user']['id'];
+
+    $query = "SELECT *FROM `tbl_user` WHERE `user_id`='$id'";
+    $result = mysqli_query($conn, $query)or die($mysqli_error($conn));
+    $row = mysqli_fetch_assoc($result); 
+    if ($row) {
+        $passwordOld= $row['password'];
+    } else {
+            echo '<script> alert("No data found"); </script>';
+    }
   
 ?>
 <html>
@@ -165,7 +160,6 @@ if ($row) {
                 </div>  
             </div>
         </footer>
-
         <!-- end of footer -->
     </body>
 </html>

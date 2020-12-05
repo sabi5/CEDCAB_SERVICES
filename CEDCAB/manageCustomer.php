@@ -27,6 +27,7 @@ if (!isset($_SESSION['user']['username'])) {
         <title>Manage Customer page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <link href="admin/sidebar.css" type="text/css" rel="stylesheet">
     </head>
     <body>
@@ -58,7 +59,7 @@ if (!isset($_SESSION['user']['username'])) {
         $name = $_SESSION['user']['username'];
         echo "<h1 style = 'background-color: pink;text-align :center;'>
          Welcome , ' ".$name." ' !!</h1>";?>
-        <h1 style="text-align: center;">Manage Customers</h1>
+        <h1 style="text-align: center;"><marquee>Manage Customers</marquee></h1>
         <table >
             <tr>
                 <th>Id</th>
@@ -86,7 +87,7 @@ if (!isset($_SESSION['user']['username'])) {
                             <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";}?></td>
                             <!-- <td><?php echo $value['password']; ?></td>
                             <td><?php echo $value['is_admin']; ?></td> -->
-                            <td><a href="edituser.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
+                            <td><a href="edituser.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
 							<!-- <td><a href="deleteuser.php?id=<?php echo $value['user_id']; ?>" title='Delete'>DELETE</a></td> -->
                         </tr>
                     <?php

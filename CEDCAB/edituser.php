@@ -36,9 +36,10 @@
         // $email = $_POST['email'];
         $mobile = $_POST['mobile'];
 
-        if ( !ctype_alpha($username))  {
+       
+        if ( !preg_match('/^[a-zA-Z]+[a-zA-Z0-9._]+$/', $username))  {
         
-            echo "<script>alert('Enter alphabets only');</script>"; 
+            echo("<script>alert('Only numbers not accepted');</script>");
         
         }else {
             $id = $_POST['id'];
@@ -143,9 +144,7 @@
                         <div class="py-2 my-4">
                             <div>
                                 <p class="text-white"> <i class="fa fa-map-marker mx-2 "></i>
-                                        309 - Rupa Solitaire,
-                                    Bldg. No. A - 1, Sector - 1
-                                    Mahape, Navi Mumbai - 400710</p>
+                                Gomti Nagar</p>
                             </div>
 
                             <div> 

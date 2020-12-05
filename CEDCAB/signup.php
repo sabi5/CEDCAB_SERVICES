@@ -28,6 +28,11 @@ if (isset($_POST['submit'])) {
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+        <style>
+            body {
+                background-color: lightcyan;
+            }
+        </style>
     </head>
     <body>
     <header>
@@ -116,9 +121,7 @@ if (isset($_POST['submit'])) {
                         <div class="py-2 my-4">
                             <div>
                                 <p class="text-white"> <i class="fa fa-map-marker mx-2 "></i>
-                                        309 - Rupa Solitaire,
-                                    Bldg. No. A - 1, Sector - 1
-                                    Mahape, Navi Mumbai - 400710</p>
+                                Gomti Nagar</p>
                             </div>
 
                             <div> 

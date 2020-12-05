@@ -57,11 +57,9 @@ class User {
                     echo "<script>alert('password Incorrect');</script>";
                 }
         
-            } else {
+        } else {
                 echo "<script>alert('Invalid Email');</script>";
             }
-        
-    
     }
 
     function signup($username, $password, $repassword, $email, $mobile, $con){
@@ -92,8 +90,6 @@ class User {
                                     VALUES ('$username', '$email', NOW(), '$mobile', 0, '$password',0)";
                 
                             $iquery = mysqli_query($con, $insertquery);
-
-
                             
                             if ($iquery) {
                                 echo "<script>alert('Inserted Successful');</script>";
@@ -133,8 +129,7 @@ class User {
     function totalSpent($con){
 
         $id = $_SESSION['user']['id'];
-        // echo $id;
-    
+        
         $data =array();
         
         $sql = "SELECT * FROM `tbl_ride` WHERE `customer_user_id` = '$id'";

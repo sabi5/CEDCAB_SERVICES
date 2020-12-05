@@ -42,9 +42,7 @@ if (!isset($_SESSION['user']['username'])) {
             $sorted = $location->sort($sort, $Connection->con);
             $fare = $location->fare($sort, $Connection->con);
             $cabtype = $location->cabtype($sort, $Connection->con);
-
-        }
-        
+        } 
     }
         
 ?>
@@ -58,6 +56,7 @@ if (!isset($_SESSION['user']['username'])) {
         <title>Pending Rides</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <link href="admin/sidebar.css" type="text/css" rel="stylesheet">
     </head>
     <body>
@@ -89,7 +88,7 @@ if (!isset($_SESSION['user']['username'])) {
         $name = $_SESSION['user']['username'];
         echo "<h1 style = 'background-color: pink;text-align :center;'>
          Welcome , ' ".$name." ' !!</h1>";?>
-        <h1 style="text-align: center;">Pending Rides</h1>
+        <h1 style="text-align: center;"><marquee>Pending Rides</marquee></h1>
 
         <!-- *********************** filter and sort-->
 
@@ -245,18 +244,18 @@ if (!isset($_SESSION['user']['username'])) {
                         foreach($filter as $value){
                             ?>
                                 
-                                <tr>
-                                    <td><?php echo $value['ride_id']; ?></td>
-                                    <td><?php echo $value['ride_date']; ?></td>
-                                    <td><?php echo $value['pick_place']; ?></td>
-                                    <td><?php echo $value['drop_place']; ?></td>
-                                    <td><?php echo $value['cab_type']; ?></td>
-                                    <td><?php echo $value['total_distance']; ?></td>
-                                    <td><?php echo $value['luggage']; ?></td>
-                                    <td><?php echo $value['total_fare']; ?></td>
-                                    <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
-                                    <td><?php echo $value['customer_user_id']; ?></td>
-                                </tr>
+                            <tr>
+                                <td><?php echo $value['ride_id']; ?></td>
+                                <td><?php echo $value['ride_date']; ?></td>
+                                <td><?php echo $value['pick_place']; ?></td>
+                                <td><?php echo $value['drop_place']; ?></td>
+                                <td><?php echo $value['cab_type']; ?></td>
+                                <td><?php echo $value['total_distance']; ?></td>
+                                <td><?php echo $value['luggage']; ?></td>
+                                <td><?php echo $value['total_fare']; ?></td>
+                                <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                                <td><?php echo $value['customer_user_id']; ?></td>
+                            </tr>
                             <?php
                             }
                     }

@@ -60,7 +60,7 @@
         </header>
         <div id="wrapper">
             <div class="container form">
-                <h2 class ="mt-5">ADD LOCATION</h2><br>
+                <h2 class ="mt-5"><marquee>ADD LOCATION</marquee></h2><br>
                 <form action="addLocation.php" method="POST">
                     <p>
                         <label for="name">Location : <input type="text" 
@@ -104,9 +104,7 @@
                         <div class="py-2 my-4">
                             <div>
                                 <p class="text-white"> <i class="fa fa-map-marker mx-2 "></i>
-                                        309 - Rupa Solitaire,
-                                    Bldg. No. A - 1, Sector - 1
-                                    Mahape, Navi Mumbai - 400710</p>
+                                Gomti Nagar</p>
                             </div>
 
                             <div> 

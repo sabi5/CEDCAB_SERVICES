@@ -23,10 +23,18 @@ if (isset($_POST['submit'])) {
     $uquery = mysqli_query($conn, $insert);
     
     if ($uquery) {
-        echo '<script> alert("Updated successfully")</script>';
-        ?>
-        <script>location.replace("admin.php")</script>
-        <?php
+
+        if($block == 1){
+            echo '<script> alert("User is Unblocked now")</script>';
+            ?>
+            <script>location.replace("admin.php")</script>
+            <?php
+        }elseif($block == 0){
+            echo '<script> alert("User is Blocked now")</script>';
+            ?>
+            <script>location.replace("admin.php")</script>
+            <?php
+        }
     }
 }
 
@@ -134,9 +142,7 @@ if ($row) {
                         <div class="py-2 my-4">
                             <div>
                                 <p class="text-white"> <i class="fa fa-map-marker mx-2 "></i>
-                                        309 - Rupa Solitaire,
-                                    Bldg. No. A - 1, Sector - 1
-                                    Mahape, Navi Mumbai - 400710</p>
+                                Gomti Nagar</p>
                             </div>
 
                             <div> 

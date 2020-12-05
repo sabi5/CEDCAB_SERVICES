@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
     // echo $repassword;
 
     if($password == $repassword){
-        echo '<script> alert("please input new password")</script>';
+        echo '<script> alert("New password must be different")</script>';
 
     }elseif($password != $repassword){
     
@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
         // echo $uquery;
         
         if ($uquery) {
-            echo '<script> alert("Updated successfully")</script>';
+            echo '<script> alert("Your password has been changed successfully, please login again")</script>';
             session_destroy();
             ?>
             <!-- <script>location.replace("logout.php")</script> -->
@@ -150,9 +150,7 @@ if ($row) {
                         <div class="py-2 my-4">
                             <div>
                                 <p class="text-white"> <i class="fa fa-map-marker mx-2 "></i>
-                                        309 - Rupa Solitaire,
-                                    Bldg. No. A - 1, Sector - 1
-                                    Mahape, Navi Mumbai - 400710</p>
+                                Gomti Nagar</p>
                             </div>
 
                             <div> 

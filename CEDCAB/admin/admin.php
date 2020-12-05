@@ -49,7 +49,7 @@
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="sidebar.css">
+       
     </head>
     <body>
         <div class="navbar">
@@ -60,7 +60,7 @@
             
             <a href="../logout.php">Logout</a>  
         </div>
-        <marquee><table>
+        <marquee><table style = 'height: 100px;'>
                     <tr>
                         <th>Id</th>
                         <th>Date</th>

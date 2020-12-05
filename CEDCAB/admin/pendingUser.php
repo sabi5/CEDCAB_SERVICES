@@ -44,6 +44,7 @@ $locate = $location->pendingUser($Connection->con);
         <title>Manage User</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <link href="sidebar.css" type="text/css" rel="stylesheet">
     </head>
     <body>
@@ -80,7 +81,7 @@ $locate = $location->pendingUser($Connection->con);
             <a href="../logout.php">Logout</a>  
         </div>
   
-        <h1 style="text-align: center;">Pending Users</h1>
+        <h1 style="text-align: center;"><marquee>Pending Users</marquee></h1>
 
         <!-- *********************** filter and sort-->
 
@@ -108,6 +109,7 @@ $locate = $location->pendingUser($Connection->con);
                 <!-- <th>password</th>
                 <th>Is_admin</th> -->
                 <th>Action</th>
+                <th>Action</th> 
                 
             </tr>
             
@@ -126,8 +128,8 @@ if(isset($_POST['sort']) && $sort == "ascending"){
             <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";} ?></td>
             <!-- <td><?php echo $value['password']; ?></td>
             <td><?php echo $value['is_admin']; ?></td> -->
-            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
-            <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
+            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+            <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')"><i class='fas fa-trash' style='font-size:24px'></i></a></td>
         </tr>
     <?php
     }
@@ -146,8 +148,8 @@ if(isset($_POST['sort']) && $sort == "ascending"){
             <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";} ?></td>
             <!-- <td><?php echo $value['password']; ?></td>
             <td><?php echo $value['is_admin']; ?></td> -->
-            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
-            <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
+            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+            <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')"><i class='fas fa-trash' style='font-size:24px'></i></a></td>
         </tr>
     <?php
     }
@@ -164,8 +166,8 @@ if(isset($_POST['sort']) && $sort == "ascending"){
             <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";} ?></td>
             <!-- <td><?php echo $value['password']; ?></td>
             <td><?php echo $value['is_admin']; ?></td> -->
-            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
-            <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
+            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+            <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')"><i class='fas fa-trash' style='font-size:24px'></i></a></td>
         </tr>
     <?php
     }
@@ -182,8 +184,8 @@ if(isset($_POST['sort']) && $sort == "ascending"){
             <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";} ?></td>
             <!-- <td><?php echo $value['password']; ?></td>
             <td><?php echo $value['is_admin']; ?></td> -->
-            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
-            <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
+            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+            <td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')"><i class='fas fa-trash' style='font-size:24px'></i></a></td>
         </tr>
     <?php
     }
@@ -202,8 +204,8 @@ if(isset($_POST['sort']) && $sort == "ascending"){
                             <td><?php if($value['isblock'] == 1) { echo "Unblock";} else{ echo "BLOCK";} ?></td>
                             <!-- <td><?php echo $value['password']; ?></td>
                             <td><?php echo $value['is_admin']; ?></td> -->
-                            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')">EDIT</a></td>
-							<td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td>
+                            <td><a href="edituserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+							<td><a href="deleteuserAdmin.php?id=<?php echo $value['user_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')"><i class='fas fa-trash' style='font-size:24px'></i></a></td>
                         </tr>
                     <?php
                     }}?>

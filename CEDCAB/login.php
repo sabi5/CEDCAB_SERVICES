@@ -31,9 +31,17 @@ if (isset($_POST['submit'])){
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../sidebar.css">
+        <style>
+            body {
+                background-color: lightcyan;
+            }
+        </style>
+        
     </head>
-    <body>
-    <header>
+    <body id = "body">
+  
+        <header>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                     <nav class="navbar navbar-expand-md navbar-light bg-dark">
@@ -58,8 +66,9 @@ if (isset($_POST['submit'])){
                 </div>
             </div> 
         </header>
-       <div class="container form">
-           <div id="login-form">
+        <div class="container form" >
+       
+            <div id="login-form" class ="float-center" style ="padding-left: 350px; ">
                 <h2 class ="mt-5">Login</h2><br>
                 <form action="login.php" method="POST">
                     <p>
@@ -105,9 +114,7 @@ if (isset($_POST['submit'])){
                         <div class="py-2 my-4">
                             <div>
                                 <p class="text-white"> <i class="fa fa-map-marker mx-2 "></i>
-                                        309 - Rupa Solitaire,
-                                    Bldg. No. A - 1, Sector - 1
-                                    Mahape, Navi Mumbai - 400710</p>
+                                        Gomti Nagar</p>
                             </div>
 
                             <div> 

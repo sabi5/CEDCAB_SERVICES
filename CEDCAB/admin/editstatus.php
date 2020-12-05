@@ -23,9 +23,26 @@ if (isset($_POST['submit'])) {
     $uquery = mysqli_query($conn, $insert);
     
     if ($uquery) {
-        echo '<script> alert("Updated successfully")</script>';
+
+        if($status == 1){
+            echo '<script> alert("pending ride status updated successfully")</script>';
+            ?>
+            <script>location.replace("admin.php")</script>
+            <?php
+        }elseif($status == 2){
+            echo '<script> alert("Ride has been Completed Successfully")</script>';
+            ?>
+            <script>location.replace("admin.php")</script>
+            <?php
+        }elseif($status == 0){
+            echo '<script> alert("Ride has been Cancelled")</script>';
+            ?>
+            <script>location.replace("admin.php")</script>
+            <?php
+        }
+        // echo '<script> alert("Updated successfully")</script>';
         ?>
-        <script>location.replace("admin.php")</script>
+        <!-- <script>location.replace("admin.php")</script> -->
         <?php
     }
 }
@@ -82,8 +99,15 @@ if ($row) {
                 <h2 class ="mt-5">Update Status</h2><br>
                 <form action="editstatus.php" method="POST">
                     <p>
-                        <label for="status">Status : <input type="number" 
-                         name="status" value="<?php  echo $status; ?>" required></label>
+                        <label for="status">Status : </label>
+                         <select name="status" required>
+                            <option value="" disabled selected><?php if($status == 1){echo "Pending";}elseif($status == 2){ echo "Completed"; }else{ echo "Cancelled";}?></option>
+                            <option value="1">pending</option>
+                            <option value="2">complete</option>
+                            <option value="0">cancel</option>
+                            
+                           
+                        </select>
                     </p>
                     
 					<input type="hidden" name="id" value="<?php  echo $id; ?>" 
@@ -99,7 +123,7 @@ if ($row) {
         </div>
         <!-- footer -->
         <footer  style="background-color: #2c292f">
-            <div class="container" style="margin-top: 50px;">
+            <div class="container" style="margin-top: 150px;">
                 <div class="row ">
                     <div class="col-md-4 text-center text-md-left ">
                         
@@ -123,9 +147,7 @@ if ($row) {
                         <div class="py-2 my-4">
                             <div>
                                 <p class="text-white"> <i class="fa fa-map-marker mx-2 "></i>
-                                        309 - Rupa Solitaire,
-                                    Bldg. No. A - 1, Sector - 1
-                                    Mahape, Navi Mumbai - 400710</p>
+                                Gomti Nagar</p>
                             </div>
 
                             <div> 
