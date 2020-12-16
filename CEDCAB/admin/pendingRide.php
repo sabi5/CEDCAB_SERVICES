@@ -24,9 +24,9 @@ $locate = $location->pendingRide($Connection->con);
     if(isset($_POST['filter'])){
         if(!empty($_POST['select'])){
             $selected = $_POST['select'];
-            echo $selected;
-            echo "</br>";
-            $filter = $ride->filterAdmin($selected, $Connection->con);
+            // echo $selected;
+            // echo "</br>";
+            $filter = $ride->filterpendingAdmin($selected, $Connection->con);
         }
         else{
         echo("not ");
@@ -38,9 +38,9 @@ $locate = $location->pendingRide($Connection->con);
             $sort = $_POST['select'];
             // echo $sort;
             // echo "</br>";
-            $sorted = $ride->sortAdmin($sort, $Connection->con);
-            $fare = $ride->fareAdmin($sort, $Connection->con);
-            $cabtype = $ride->cabtypeAdmin($sort, $Connection->con);
+            $sorted = $ride->sortpendingAdmin($sort, $Connection->con);
+            $fare = $ride->farependingAdmin($sort, $Connection->con);
+            $cabtype = $ride->cabtypependingAdmin($sort, $Connection->con);
 
         }
         else{

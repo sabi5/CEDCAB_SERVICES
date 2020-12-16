@@ -27,7 +27,7 @@ if (!isset($_SESSION['user']['username'])) {
         if(!empty($_POST['select'])){
             $selected = $_POST['select'];
            
-            $filter = $location->filter($selected, $Connection->con);
+            $filter = $location->filterAll($selected, $Connection->con);
         }
         else{
         echo("not ");
@@ -39,9 +39,9 @@ if (!isset($_SESSION['user']['username'])) {
             $sort = $_POST['select'];
             echo $sort;
             echo "</br>";
-            $sorted = $location->sort($sort, $Connection->con);
-            $fare = $location->fare($sort, $Connection->con);
-            $cabtype = $location->cabtype($sort, $Connection->con);
+            $sorted = $location->sortAll($sort, $Connection->con);
+            $fare = $location->fareAll($sort, $Connection->con);
+            $cabtype = $location->cabtypeAll($sort, $Connection->con);
 
         }
         else{

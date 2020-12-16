@@ -68,9 +68,9 @@ class User {
                 
                 $length = strlen ($mobile);  
               
-                if ( !ctype_alpha($username)) { 
+                if ( !preg_match('/^[a-zA-Z]+[a-zA-Z0-9._]+$/', $username)) { 
             
-                    echo "<script>alert('Username must contain letters only');</script>";
+                    echo "<script>alert('Username must contain letters & digits only');</script>";
 
                 }elseif( $length < 10 || $length > 10) {  
                     echo "<script>alert('Mobile must have 10 digits');</script>";

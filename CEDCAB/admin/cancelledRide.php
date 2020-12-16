@@ -1,10 +1,10 @@
 <?php
     require "../Dbconnection.php";
-
+    require "../Ride.php";
     require "../Admin.php";
 
     $Connection = new Dbconnection();
-
+    $ride = new Ride();  
     $location = new Admin();  
     $locate = $location->cancelRide($Connection->con);  
 
@@ -14,6 +14,31 @@
     <!-- // <script>location.replace("../customer.php")</script>  -->
    <?php
     // }
+    if(isset($_POST['filter'])){
+        if(!empty($_POST['select'])){
+            $selected = $_POST['select'];
+            
+            $filter = $ride->filtercancelAdmin($selected, $Connection->con);
+        }
+        else{
+        echo("not ");
+        }
+    }
+
+    if(isset($_POST['sort'])){
+        if(!empty($_POST['select'])){
+            $sort = $_POST['select'];
+            
+            $sorted = $ride->sortcancelAdmin($sort, $Connection->con);
+            $fare = $ride->farecancelAdmin($sort, $Connection->con);
+            $cabtype = $ride->cabtypecancelAdmin($sort, $Connection->con);
+
+        }
+        else{
+        echo("not ");
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +85,45 @@
         </div>
   
         <h1 style="text-align: center;"><marquee>Cancelled Rides</marquee></h1>
+
+         <!-- *********************** filter and sort-->
+
+         <form action="cancelledRide.php" method="post">
+            <select name="select" required>
+                <option value="" disabled selected>Choose an option</option>
+                <option value="last 7 days">last 7 days</option>
+                <option value="last 30 days">last 30 days</option>
+            </select>
+            <input type="submit" name="filter" value="FILTER" class="filter">
+        </form>
+        <br>
+        <form action="cancelledRide.php" method="post">
+            <select name="select" required>
+                <option value="" disabled selected>Choose an option</option>
+                <option value="CedMicro">CedMicro</option>
+                <option value="CedMini">CedMini</option>
+                <option value="CedRoyal">CedRoyal</option>
+                <option value="CedSUV">CedSUV</option>
+            </select>
+            <input type="submit" name="filter" value="FILTER(CABTYPE)" class="filter">
+        </form>
+        <br>
+
+        <form action="cancelledRide.php" method="post">
+            <select name="select" required>
+                <option value="" disabled selected>Choose an option</option>
+                <option value="ascending">Ascending(RIDE_DATE)</option>
+                <option value="descending">Descending(RIDE_DATE)</option>
+                <option value="asc">Ascending(FARE)</option>
+                <option value="desc">Descending(FARE)</option>
+                <option value="cab asc">Ascending(CABTYPE)</option>
+                <option value="cab desc">Descending(CABTYPE)</option>
+            </select>
+            <input type="submit" name="sort" value="SORT BY" class="filter">
+        </form>
+        <br><br>
+<!-- *********************************************** end filter -->
+
         <table>
             <tr>
                 <th>Id</th>
@@ -78,7 +142,264 @@
             </tr>
             
             <?php
+                if(isset($_POST['filter']) && $selected == "last 30 days"){
+                    foreach($filter as $value){
+                    ?>
+                        
+                        <tr>
+                        <td><?php echo $value['ride_id']; ?></td>
+                            <td><?php echo $value['ride_date']; ?></td>
+                            <td><?php echo $value['pick_place']; ?></td>
+                            <td><?php echo $value['drop_place']; ?></td>
+                            <td><?php echo $value['cab_type']; ?></td>
+                            <td><?php echo $value['total_distance']; ?></td>
+                            <td><?php echo $value['luggage']; ?></td>
+                            <td><?php echo $value['total_fare']; ?></td>
+                            <td><?php if($value['status'] == 1) { echo "<p style ='background-color: red;'>Pending</p>";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                            <td><?php echo $value['customer_user_id']; ?></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                            <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                        </tr>
+                    <?php
+                    }
+                }elseif(isset($_POST['filter']) && $selected == "last 7 days"){
+                    foreach($filter as $value){
+                        ?>
+                            
+                            <tr>
+                                <td><?php echo $value['ride_id']; ?></td>
+                                <td><?php echo $value['ride_date']; ?></td>
+                                <td><?php echo $value['pick_place']; ?></td>
+                                <td><?php echo $value['drop_place']; ?></td>
+                                <td><?php echo $value['cab_type']; ?></td>
+                                <td><?php echo $value['total_distance']; ?></td>
+                                <td><?php echo $value['luggage']; ?></td>
+                                <td><?php echo $value['total_fare']; ?></td>
+                                <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                                <td><?php echo $value['customer_user_id']; ?></td>
+                                <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                                <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                            </tr>
+                        <?php
+                        }
+                }elseif(isset($_POST['filter']) && $selected == "CedMicro"){
+                    foreach($filter as $value){
+                        ?>
+                            
+                            <tr>
+                                <td><?php echo $value['ride_id']; ?></td>
+                                <td><?php echo $value['ride_date']; ?></td>
+                                <td><?php echo $value['pick_place']; ?></td>
+                                <td><?php echo $value['drop_place']; ?></td>
+                                <td><?php echo $value['cab_type']; ?></td>
+                                <td><?php echo $value['total_distance']; ?></td>
+                                <td><?php echo $value['luggage']; ?></td>
+                                <td><?php echo $value['total_fare']; ?></td>
+                                <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                                <td><?php echo $value['customer_user_id']; ?></td>
+                                <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                                <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                            </tr>
+                        <?php
+                        }
+                }elseif(isset($_POST['filter']) && $selected == "CedMini"){
+                    foreach($filter as $value){
+                        ?>
+                            
+                            <tr>
+                                <td><?php echo $value['ride_id']; ?></td>
+                                <td><?php echo $value['ride_date']; ?></td>
+                                <td><?php echo $value['pick_place']; ?></td>
+                                <td><?php echo $value['drop_place']; ?></td>
+                                <td><?php echo $value['cab_type']; ?></td>
+                                <td><?php echo $value['total_distance']; ?></td>
+                                <td><?php echo $value['luggage']; ?></td>
+                                <td><?php echo $value['total_fare']; ?></td>
+                                <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                                <td><?php echo $value['customer_user_id']; ?></td>
+                                <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                                <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                                    </tr>
+                                <?php
+                                }
+                }elseif(isset($_POST['filter']) && $selected == "CedRoyal"){
+                    foreach($filter as $value){
+                        ?>
+                            
+                            <tr>
+                                <td><?php echo $value['ride_id']; ?></td>
+                                <td><?php echo $value['ride_date']; ?></td>
+                                <td><?php echo $value['pick_place']; ?></td>
+                                <td><?php echo $value['drop_place']; ?></td>
+                                <td><?php echo $value['cab_type']; ?></td>
+                                <td><?php echo $value['total_distance']; ?></td>
+                                <td><?php echo $value['luggage']; ?></td>
+                                <td><?php echo $value['total_fare']; ?></td>
+                                <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                                <td><?php echo $value['customer_user_id']; ?></td>
+                                <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                                <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                                    </tr>
+                                <?php
+                                }
+                }elseif(isset($_POST['filter']) && $selected == "CedSUV"){
+                    foreach($filter as $value){
+                        ?>
+                            
+                            <tr>
+                                <td><?php echo $value['ride_id']; ?></td>
+                                <td><?php echo $value['ride_date']; ?></td>
+                                <td><?php echo $value['pick_place']; ?></td>
+                                <td><?php echo $value['drop_place']; ?></td>
+                                <td><?php echo $value['cab_type']; ?></td>
+                                <td><?php echo $value['total_distance']; ?></td>
+                                <td><?php echo $value['luggage']; ?></td>
+                                <td><?php echo $value['total_fare']; ?></td>
+                                <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                                <td><?php echo $value['customer_user_id']; ?></td>
+                                <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                                <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                                <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                            </tr>
+                        <?php
+                        }
+                }
                 
+                
+                elseif(isset($_POST['sort']) && $sort == "ascending"){
+                    foreach($sorted as $value){
+                        
+                    ?>
+                        <tr>
+                            <td><?php echo $value['ride_id']; ?></td>
+                            <td><?php echo $value['ride_date']; ?></td>
+                            <td><?php echo $value['pick_place']; ?></td>
+                            <td><?php echo $value['drop_place']; ?></td>
+                            <td><?php echo $value['cab_type']; ?></td>
+                            <td><?php echo $value['total_distance']; ?></td>
+                            <td><?php echo $value['luggage']; ?></td>
+                            <td><?php echo $value['total_fare']; ?></td>
+                            <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                            <td><?php echo $value['customer_user_id']; ?></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                            <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                        </tr>
+                    <?php
+                    }
+                }elseif(isset($_POST['sort']) && $sort == "descending"){
+                    foreach($sorted as $value){
+                        
+                        
+                    ?>
+                        
+                        <tr>
+                            <td><?php echo $value['ride_id']; ?></td>
+                            <td><?php echo $value['ride_date']; ?></td>
+                            <td><?php echo $value['pick_place']; ?></td>
+                            <td><?php echo $value['drop_place']; ?></td>
+                            <td><?php echo $value['cab_type']; ?></td>
+                            <td><?php echo $value['total_distance']; ?></td>
+                            <td><?php echo $value['luggage']; ?></td>
+                            <td><?php echo $value['total_fare']; ?></td>
+                            <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                            <td><?php echo $value['customer_user_id']; ?></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                            <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                        </tr>
+                    <?php
+                    }
+                }elseif(isset($_POST['sort']) && $sort == "asc"){
+                    foreach($fare as $value){
+                        
+                    ?>
+                        <tr>
+                            <td><?php echo $value['ride_id']; ?></td>
+                            <td><?php echo $value['ride_date']; ?></td>
+                            <td><?php echo $value['pick_place']; ?></td>
+                            <td><?php echo $value['drop_place']; ?></td>
+                            <td><?php echo $value['cab_type']; ?></td>
+                            <td><?php echo $value['total_distance']; ?></td>
+                            <td><?php echo $value['luggage']; ?></td>
+                            <td><?php echo $value['total_fare']; ?></td>
+                            <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                            <td><?php echo $value['customer_user_id']; ?></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                            <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                        </tr>
+                    <?php
+                    }
+                }elseif(isset($_POST['sort']) && $sort == "desc"){
+                    foreach($fare as $value){
+                        
+                    ?>
+                        <tr>
+                            <td><?php echo $value['ride_id']; ?></td>
+                            <td><?php echo $value['ride_date']; ?></td>
+                            <td><?php echo $value['pick_place']; ?></td>
+                            <td><?php echo $value['drop_place']; ?></td>
+                            <td><?php echo $value['cab_type']; ?></td>
+                            <td><?php echo $value['total_distance']; ?></td>
+                            <td><?php echo $value['luggage']; ?></td>
+                            <td><?php echo $value['total_fare']; ?></td>
+                            <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                            <td><?php echo $value['customer_user_id']; ?></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                            <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                        </tr>
+                    <?php
+                    }
+                }elseif(isset($_POST['sort']) && $sort == "cab asc"){
+                    foreach($cabtype as $value){ 
+                    ?>
+                        <tr>
+                            <td><?php echo $value['ride_id']; ?></td>
+                            <td><?php echo $value['ride_date']; ?></td>
+                            <td><?php echo $value['pick_place']; ?></td>
+                            <td><?php echo $value['drop_place']; ?></td>
+                            <td><?php echo $value['cab_type']; ?></td>
+                            <td><?php echo $value['total_distance']; ?></td>
+                            <td><?php echo $value['luggage']; ?></td>
+                            <td><?php echo $value['total_fare']; ?></td>
+                            <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                            <td><?php echo $value['customer_user_id']; ?></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                            <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                        </tr>
+                    <?php
+                    }
+                }elseif(isset($_POST['sort']) && $sort == "cab desc"){
+                    foreach($cabtype as $value){
+                    ?>
+                        <tr>
+                            <td><?php echo $value['ride_id']; ?></td>
+                            <td><?php echo $value['ride_date']; ?></td>
+                            <td><?php echo $value['pick_place']; ?></td>
+                            <td><?php echo $value['drop_place']; ?></td>
+                            <td><?php echo $value['cab_type']; ?></td>
+                            <td><?php echo $value['total_distance']; ?></td>
+                            <td><?php echo $value['luggage']; ?></td>
+                            <td><?php echo $value['total_fare']; ?></td>
+                            <td><?php if($value['status'] == 1) { echo "Pending";} elseif($value['status'] == 2){ echo "Completed";} else{ echo "Cancelled";}  ?></td>
+                            <td><?php echo $value['customer_user_id']; ?></td>
+                            <td><a href="editstatus.php?id=<?php echo $value['ride_id']; ?>" title='Edit' onclick="return confirm('Are you sure?')"><i class='fas fa-edit' style='font-size:24px'></i></a></td>
+                            <!-- <td><a href="deletestatus.php?id=<?php echo $value['ride_id']; ?>" title='Delete' onclick="return confirm('Are you sure?')">DELETE</a></td> -->
+                            <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
+                        </tr>
+                    <?php
+                    }
+                }
+                
+                else{
                 foreach($locate as $value){
             ?>
                 
@@ -98,7 +419,7 @@
                     <td><a href="invoice.php?id=<?php echo $value['ride_id']; ?>" title='Edit'><i class='fas fa-file' style='font-size:24px'></i></a></td>
                 </tr>
             <?php
-            }?>
+            }}?>
         </table>
     </body>
 </html>

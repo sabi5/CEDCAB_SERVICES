@@ -20,7 +20,7 @@ $locate = $location->completeRide($Connection->con);
             $selected = $_POST['select'];
             // echo $selected;
             // echo "</br>";
-            $filter = $ride->filterAdmin($selected, $Connection->con);
+            $filter = $ride->filtercompleteAdmin($selected, $Connection->con);
         }
         else{
         echo("not ");
@@ -32,9 +32,9 @@ $locate = $location->completeRide($Connection->con);
             $sort = $_POST['select'];
             // echo $sort;
             // echo "</br>";
-            $sorted = $ride->sortAdmin($sort, $Connection->con);
-            $fare = $ride->fareAdmin($sort, $Connection->con);
-            $cabtype = $ride->cabtypeAdmin($sort, $Connection->con);
+            $sorted = $ride->sortcompleteAdmin($sort, $Connection->con);
+            $fare = $ride->farecompleteAdmin($sort, $Connection->con);
+            $cabtype = $ride->cabtypecompleteAdmin($sort, $Connection->con);
 
         }
         else{
